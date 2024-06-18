@@ -20,7 +20,7 @@ const DynamicNews = ({ name, year }: { name: string, year: number }) => {
 
 const RecentInvest = () => {
   return (
-    <Card className="w-full bg-white p-5">
+    <Card className="w-full h-1/2 bg-white p-5">
       <CardHeader>
         <div className="text-base font-medium pb-6">Recent Investment</div>
       </CardHeader>

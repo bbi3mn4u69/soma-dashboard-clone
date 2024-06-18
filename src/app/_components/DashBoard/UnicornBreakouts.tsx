@@ -49,16 +49,9 @@ const UnicornBreakouts = () => {
           Soma Top Unicorn Breakouts
         </div>
       </CardHeader>
-      <CardBody className="flex-grow ">
-        <div className="flex flex-col justify-center h-96 overflow-y-scroll">
+      <CardBody className="flex-grow overflow-y-auto" >
+        <div className="flex flex-col justify-center">
           <Unicorns location="Uadawda" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
-          <Unicorns location="US" industry="frontend" value="$1000000" />
           <Unicorns location="US" industry="frontend" value="$1000000" />
           <Unicorns location="US" industry="frontend" value="$1000000" />
           <Unicorns location="US" industry="frontend" value="$1000000" />

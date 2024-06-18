@@ -10,26 +10,26 @@ const DashboardPage = () => {
   return (
     <>
       <SessionProvider>
-      <div className="h-screen bg-slate-50">
-  <div className="flex flex-row justify-start h-full">
-    <div>
-      <SidePanel />
-    </div>
-    <div className="flex flex-col w-full h-full">  
-      <SearchBar />
-      <div className="flex flex-row p-7 flex-grow">  
-        <div className="flex-grow flex-col space-y-3">
-          <UserCard />
-          <UnicornBreakouts />
+        <div className="h-screen bg-slate-50">
+          <div className="flex h-full flex-row justify-start">
+            <div>
+              <SidePanel />
+            </div>
+            <div className="flex w-full h-full flex-col">
+              <SearchBar />
+              <div className="flex flex-row flex-grow overflow-hidden p-7">
+                <div className="flex-col flex flex-grow space-y-3">
+                  <UserCard />
+                  <UnicornBreakouts />
+                </div>
+                <div className="flex w-full max-w-md flex-col space-y-3 pl-7 2xl:max-w-lg">
+                  <SomaNews />
+                  <RecentInvest />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="w-full max-w-md pl-7 2xl:max-w-lg space-y-3 flex flex-col">
-          <SomaNews />
-          <RecentInvest />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
       </SessionProvider>
     </>
   );
