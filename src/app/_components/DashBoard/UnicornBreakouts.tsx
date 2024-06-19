@@ -55,6 +55,22 @@ const UnicornBreakouts = () => {
           <Unicorns location="US" industry="frontend" value="$1000000" />
           <Unicorns location="US" industry="frontend" value="$1000000" />
           <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="Uadawda" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="Uadawda" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="Uadawda" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="Uadawda" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
+          <Unicorns location="US" industry="frontend" value="$1000000" />
         </div>
       </CardBody>
     </Card>
