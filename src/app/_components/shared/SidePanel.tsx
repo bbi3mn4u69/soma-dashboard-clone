@@ -1,9 +1,12 @@
 "use client";
 import { GrayLogo } from "../../image/gray-logo";
-import NavButton from "./NavButton";
+import NavButton from "../DashBoard/NavButton";
 import { Home, Portfolio, Infor, Feed, Saved, Admin, Stock } from "../Icon";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 const SidePanel = () => {
+  const router = useRouter();
   const [activeButton, setActiveButton] = useState<string>("Home");
   return (
     <>
@@ -15,13 +18,18 @@ const SidePanel = () => {
           <NavButton
             title="Home"
             icon={<Home active={activeButton === "Home"} />}
-            onClick={() => setActiveButton("Home")}
+            onClick={() => {
+              setActiveButton("Home"), router.push("/dashboard/home");
+            }}
             isActive={activeButton === "Home"}
           />
           <NavButton
             title="Portfolio"
             icon={<Portfolio active={activeButton === "Portfolio"} />}
-            onClick={() => setActiveButton("Portfolio")}
+            onClick={() => {
+              setActiveButton("Portfolio");
+              router.push("/dashboard/portfolio");
+            }}
             isActive={activeButton === "Portfolio"}
           />
           <NavButton
