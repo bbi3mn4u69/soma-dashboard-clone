@@ -26,29 +26,40 @@ const HeroFilter = () => {
         <div className="flex w-fit flex-row justify-end gap-2">
           {[
             "All",
-            "Automation",
+            "B2B/SaaS",
             "AI",
-            "Blockchain",
-            "Cybersecurity",
-            "Digitalization",
-            "Energy",
-            "Other",
+            "FinTech",
+            "Logistics",
+            "CleanTech",
+            "FrontierTech",
+            "PropTech",
+            "HealthTech",
+            "Crypto",
+            "Consumer",
           ].map((item, index) => (
             <FilterButton key={index} buttonName={item} />
           ))}
         </div>
         <div className="w-fit text-sm font-medium mr-2">Areas</div>
         <div className="w-fit">
-          <div className="flex w-fit flex-row justify-end gap-2">
+          <div className="flex w-fit flex-row justify-start gap-2 flex-wrap">
             {[
               "All",
-              "Automation",
-              "AI",
-              "Blockchain",
-              "Cybersecurity",
-              "Digitalization",
-              "Energy",
-              "Other",
+              "SF",
+              "NYC",
+              "LA",
+              "Miami",
+              "Boston",
+              "Austin",
+              "US",
+              "Europe",
+              "MENA",
+              "SEA",
+              "India",
+              "UK",
+              "Brazil",
+              "Mexico",
+              "LatAm",
             ].map((item, index) => (
               <FilterButton key={index} buttonName={item} />
             ))}

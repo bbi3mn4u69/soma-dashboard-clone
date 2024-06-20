@@ -74,9 +74,9 @@ model VerificationToken {
 }
 
 model Company {
-    id         String    @id @default(cuid())
+    id         String    @id @unique
     name       String
-    logoUrl    String
+    logoUrl    String?
     slug       String
     oneLiner   String
     valuation  String
@@ -86,7 +86,7 @@ model Company {
 }
 
 model Sectors {
-    id        String  @id @default(cuid())
+    id        String  @id @unique
     companyId String
     company   Company @relation(fields: [companyId], references: [id])
     name      String
