@@ -12,13 +12,13 @@ export function stringToEncode(input: string): string {
   return `{"0":{"json":{"limit":30,"industry":null,"region":null,"cursor":"${input}"}}}`;
 }
 
-export async function fetchDataFromURL(url: string): Promise<any> {
+export async function fetchDataFromURL(url: string): Promise<any> {  // eslint-disable-line
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      return await response.json();
+      return await response.json(); // eslint-disable-line
     } catch (error) {
       console.error("Error fetching data:", error);
       return null;
