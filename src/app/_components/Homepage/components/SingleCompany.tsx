@@ -1,10 +1,25 @@
 import Image from "next/image";
 import PlaceHolder from "../../../image/profile.webp";
+import Link from "next/link";
 
-export const SingleCompany = ({companyLogo, companyName, oneLiner, industry, region }: { companyLogo: string, companyName: string, oneLiner: string, industry: string, region: string }) => {
+export const SingleCompany = ({
+  companyUrl,
+  companyLogo,
+  companyName,
+  oneLiner,
+  industry,
+  region,
+}: {
+  companyUrl: string;
+  companyLogo: string;
+  companyName: string;
+  oneLiner: string;
+  industry: string;
+  region: string;
+}) => {
   return (
     <>
-      <div className=" mx-auto max-w-screen-lg px-6 py-2  border-b border-gray-200">
+      <div className=" mx-auto max-w-screen-lg border-b border-gray-200  px-6 py-2">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center gap-3">
             <Image
@@ -12,13 +27,22 @@ export const SingleCompany = ({companyLogo, companyName, oneLiner, industry, reg
               alt="Company Logo"
               width={50}
               height={50}
-              className="size-6 rounded min-w-6 min-h-6"
+              className="size-6 min-h-6 min-w-6 rounded"
             />
-            <div className="w-32 lg:w-48 font-semibold text-sm text-purple-900 underline text-wrap">{companyName}</div>
+            <Link href={companyUrl} passHref legacyBehavior>
+              <a
+                target="_blank"
+                className="w-32 text-wrap text-sm font-semibold text-purple-900 underline lg:w-48"
+              >
+                {companyName}
+              </a>
+            </Link>
 
-            <div className="lg:w-[550px] font-light text-gray-400 text-sm">{oneLiner}</div>
+            <div className="text-sm font-light text-gray-400 lg:w-[550px]">
+              {oneLiner}
+            </div>
           </div>
-          <div className="flex flex-row justify-between items-center text-sm text-center w-36 font-light text-gray-400 text-nowrap">
+          <div className="flex w-36 flex-row items-center justify-between text-nowrap text-center text-sm font-light text-gray-400">
             <div>{industry}</div>
             <div>{region}</div>
           </div>
@@ -27,5 +51,3 @@ export const SingleCompany = ({companyLogo, companyName, oneLiner, industry, reg
     </>
   );
 };
-
-

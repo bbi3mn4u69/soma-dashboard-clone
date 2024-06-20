@@ -2,24 +2,21 @@
 
 import NavBar from "../shared/NavBar";
 import Hero from "./components/Hero";
-import FiveBCompanies from "./components/+5bCompanies";
-import OneToFiveBCompanies from "./components/1-5bCompanies";
-import FiveMToOneBCompanies from "./components/500m-1bCompanies";
-import OneMToFiveMCompanies from "./components/100-500mCompanies"
-import FiveMToOneMCompanies from "./components/50-100mCompanies"
-import LessThan5MCompanies from "./components/50mCompanies"
+import {Companies }from "./components/Companies";
+
 const HomePage  = () => {
     return (
         <>
-        <div>
+        <div className="scroll-smooth">
             <NavBar />
             <Hero />
-            <FiveBCompanies />
-            <OneToFiveBCompanies />
-            <FiveMToOneBCompanies />
-            <OneMToFiveMCompanies />
-            <FiveMToOneMCompanies />
-            <LessThan5MCompanies />
+            <Companies valuation="+5b" />
+            <Companies valuation="1-5b" />
+            <Companies valuation="500m-1b" />
+            <Companies valuation="100-500m" />
+            <Companies valuation="50-100m" />
+            <Companies valuation="<50m" />
+            <Companies valuation="N/A" />
         </div>
         </>
     )
