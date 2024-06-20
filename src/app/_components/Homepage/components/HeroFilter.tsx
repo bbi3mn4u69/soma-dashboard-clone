@@ -1,21 +1,32 @@
 import { Button } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+
 const FilterButton = ({
   buttonName,
   key,
+  isSelected,
+  onClick
 }: {
   buttonName: string;
   key: number;
+  isSelected: boolean;
+  onClick: () => void;
 }) => {
   return (
     <div key={key}>
-      <Button size="sm" className="bg-gray-100 text-gray-500 text-xs">
+      <div className={`bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded cursor-pointer ${isSelected ? "bg-purple-200 text-purple-900" : ""}`} onClick={onClick}>
         {buttonName}
-      </Button>
+      </div>
     </div>
   );
 };
 
 const HeroFilter = () => {
+  const [industriesSelected, setIndustriesSelected] = useState<string>("All")
+  const [regionsSelected, setRegionsSelected] = useState<string>("All")
+  useEffect(() => {
+    console.log(industriesSelected, regionsSelected)
+  }, [industriesSelected, regionsSelected])
   return (
     <div className="py-4">
       <div
@@ -37,7 +48,7 @@ const HeroFilter = () => {
             "Crypto",
             "Consumer",
           ].map((item, index) => (
-            <FilterButton key={index} buttonName={item} />
+            <FilterButton  key={index} buttonName={item} isSelected={industriesSelected === item} onClick={() => setIndustriesSelected(item)} />
           ))}
         </div>
         <div className="w-fit text-sm font-medium mr-2">Areas</div>
@@ -61,7 +72,7 @@ const HeroFilter = () => {
               "Mexico",
               "LatAm",
             ].map((item, index) => (
-              <FilterButton key={index} buttonName={item} />
+              <FilterButton key={index} buttonName={item} isSelected={regionsSelected === item} onClick={() => setRegionsSelected(item)} />
             ))}
           </div>
         </div>
