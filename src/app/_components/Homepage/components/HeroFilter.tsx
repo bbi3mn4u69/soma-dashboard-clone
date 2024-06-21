@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-
+import { useAppContext } from "../../context";
 const FilterButton = ({
   buttonName,
   key,
@@ -22,8 +22,7 @@ const FilterButton = ({
 };
 
 const HeroFilter = () => {
-  const [industriesSelected, setIndustriesSelected] = useState<string>("All")
-  const [regionsSelected, setRegionsSelected] = useState<string>("All")
+  const { industriesSelected, setIndustriesSelected, regionsSelected, setRegionsSelected } = useAppContext();
   useEffect(() => {
     console.log(industriesSelected, regionsSelected)
   }, [industriesSelected, regionsSelected])
@@ -37,7 +36,7 @@ const HeroFilter = () => {
         <div className="flex w-fit flex-row justify-end gap-2">
           {[
             "All",
-            "B2B/SaaS",
+            "B2B / SaaS",
             "AI",
             "FinTech",
             "Logistics",

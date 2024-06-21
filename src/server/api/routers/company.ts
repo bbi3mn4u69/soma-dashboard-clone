@@ -7,13 +7,28 @@ import { CreateCompanySchema } from "../../../../schema";
 import { z } from "zod";
 
 export const GetCompanyRouter = createTRPCRouter({
-  getCompaniesByValuation: publicProcedure
-    .input(z.string())
+  getCompaniesByFilter: publicProcedure
+    .input(
+      z.object({
+        valuation: z.string(),
+        region: z.string(),
+        sectorName: z.string(),
+      }),
+    )
     .query(async ({ ctx, input }) => {
       try {
         const companies = await ctx.db.company.findMany({
-          where: { 
-            valuation: input,
+          where: {
+            valuation: input.valuation,
+            ...(input.region !== "All" ? { region: input.region } : {}),
+            sectors:
+              input.sectorName !== "All"
+                ? {
+                    some: {
+                      name: input.sectorName,
+                    },
+                  }
+                : {},
           },
           include: {
             sectors: {
@@ -24,8 +39,9 @@ export const GetCompanyRouter = createTRPCRouter({
           },
         });
         return companies;
-      }catch(e){
-        console.log(e)
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch companies");
       }
     }),
 });
