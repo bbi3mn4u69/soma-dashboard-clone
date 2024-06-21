@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
-import { News } from "../Icon";
+
 import PlaceHolder from "../../image/profile.webp";
 import Image from "next/image";
 const DynamicNews = ({ name, year }: { name: string, year: number }) => {

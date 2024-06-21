@@ -6,13 +6,11 @@ import UserCard from "../../_components/DashBoard/UserCard";
 import SomaNews from "../../_components/DashBoard/SomaNews";
 import UnicornBreakouts from "../../_components/DashBoard/UnicornBreakouts";
 import RecentInvest from "../../_components/DashBoard/RecentInvestment";
-import DashboardLayout from '../layout'; // Adjust the import path as necessary
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
+
 const DashboardPage = () => {
-  const { data: session } = useSession();
   return (
-    <DashboardLayout>
+    <SessionProvider>
       <div className="h-screen bg-slate-50">
         <div className="flex h-full flex-row justify-start">
           <div>
@@ -33,7 +31,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </SessionProvider>
   );
 };
 export default DashboardPage;

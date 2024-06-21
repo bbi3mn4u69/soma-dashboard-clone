@@ -20,17 +20,17 @@ interface DataResult {
 }
 
 export async function GET(request: NextRequest) {
-  try {
+  
     const initialUrl =
       "https://somacap.com/api/trpc/companies.getCompaniesInfiniteQueryWithFilters?batch=1&input=%7B%220%22%3A%7B%22json%22%3A%7B%22limit%22%3A30%2C%22industry%22%3Anull%2C%22region%22%3Anull%2C%22cursor%22%3Anull%7D%2C%22meta%22%3A%7B%22values%22%3A%7B%22cursor%22%3A%5B%22undefined%22%5D%7D%7D%7D%7D"; // Set your initial URL here
     const results: CompanyDataType[] = [];
-    await fetchDataAndPushToArray("", results, initialUrl);
-    await saveCompaniesToDB(results);
+    try {
+      await fetchDataAndPushToArray("", results, initialUrl);
+      await saveCompaniesToDB(results);
+    } catch (e) {
+      console.log(e);
+    }
     return NextResponse.json(results);
-  } catch (e) {
-    console.log(e);
-    return NextResponse.json({ error: "Failed to fetch and save companies" });
-  }
 }
 
 async function fetchDataAndPushToArray(

@@ -7,11 +7,9 @@ import Filter from "~/app/_components/Portfolio/Filter";
 import Company from "~/app/_components/Portfolio/Company";
 import TopChips from "~/app/_components/Portfolio/Chips";
 
-import DashboardLayout from "../layout"; // Adjust the import path as necessary
-
 const PortfolioPage = () => {
   return (
-    <DashboardLayout>
+    <SessionProvider>
       <div className="h-screen bg-slate-50">
         <div className="flex h-full flex-row justify-start">
           <div>
@@ -32,7 +30,7 @@ const PortfolioPage = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </SessionProvider>
   );
 };
 export default PortfolioPage;
