@@ -1,13 +1,21 @@
 "use client";
 import { GrayLogo } from "../../image/gray-logo";
-import NavButton from "../DashBoard/NavButton";
+import NavButton from "./NavButton";
 import { Home, Portfolio, Infor, Feed, Saved, Admin, Stock } from "../Icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const SidePanel = () => {
   const router = useRouter();
-  const [activeButton, setActiveButton] = useState<string>("Home");
+  const [activeButton, setActiveButton] = useState<string>(() => {
+    return localStorage.getItem('activeButton') || "Home";
+  });
+  const pathname = usePathname();
+   // Update local storage when activeButton changes
+   useEffect(() => {
+    localStorage.setItem('activeButton', activeButton);
+  }, [activeButton]);
   return (
     <>
       <div className="min-h-screen bg-purple-900">

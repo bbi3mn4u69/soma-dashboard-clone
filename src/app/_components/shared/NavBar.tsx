@@ -9,13 +9,20 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 const NavBar = () => {
   const [activeItem, setActiveItem] = useState<string>("Portfolio");
+  const router = useRouter();
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
   };
+  useEffect(() => {
+    if (activeItem === "Sign In") {
+      router.push("/login");
+    }
+  }, [activeItem]);
   return (
     <div>
       <Navbar className="border border-b-1 border-gray-200">
