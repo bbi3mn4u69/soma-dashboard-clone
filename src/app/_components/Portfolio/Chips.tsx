@@ -6,7 +6,6 @@ const SomaFilterChip = () => {
       <div>
         <Chip
           size="sm"
-          variant="shadow"
           classNames={{
             base: "bg-purple-200",
             content: "font-semibold text-purple-600",

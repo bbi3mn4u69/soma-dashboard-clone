@@ -3,35 +3,7 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 const Filter = () => {
   return (
     <div className="flex flex-grow flex-col flex-nowrap space-y-3 text-nowrap px-7">
-      <RadioGroup
-        label="Watching"
-        color="primary"
-        size="sm"
-        classNames={{
-          label: "text-black",
-        }}
-      >
-        <Radio value="My favorites" className="text-nowrap">
-          My favorites
-        </Radio>
-      </RadioGroup>
-      <RadioGroup
-        label="Breakouts"
-        defaultValue="All"
-        color="primary"
-        size="sm"
-        classNames={{
-          label: "text-black",
-        }}
-      >
-        <Radio value="All">All</Radio>
-        <Radio value="co-invest" className="text-nowrap">
-          Live co-invests
-        </Radio>
-        <Radio value="1">1</Radio>
-        <Radio value="2">2</Radio>
-        <Radio value="3">3</Radio>
-      </RadioGroup>
+
       <RadioGroup
         label="Valuations"
         defaultValue="All"
@@ -52,6 +24,7 @@ const Filter = () => {
         <Radio value="<50m">{"<50m"}</Radio>
         <Radio value="N/A">N/A</Radio>
       </RadioGroup>
+      
       <RadioGroup
         label="Industry"
         defaultValue="All"

@@ -3,7 +3,7 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
-import { CreateCompanySchema } from "../../../../schema";
+
 import { z } from "zod";
 
 export const GetCompanyRouter = createTRPCRouter({
