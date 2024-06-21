@@ -3,23 +3,25 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Divider,
-  Link,
   Image,
   Button,
 } from "@nextui-org/react";
+import PlaceHolder from "../../image/profile.webp";
 
 import { Rocket, Add } from "../Icon";
+import { useSession } from "next-auth/react";
 
 const GridItem = ({ value, title }: { value: string; title: string }) => {
   return (
-    <div className="text-sm w-full flex flex-row items-center justify-center py-5 border">
+    <div className="flex w-full flex-row items-center justify-center border py-5 text-sm">
       <span>{value}</span> {title}
     </div>
   );
 };
 
 const UserCard = () => {
+  const { data: session } = useSession();
+
   return (
     <div>
       <Card radius="sm" shadow="sm">
@@ -30,12 +32,15 @@ const UserCard = () => {
               alt="nextui logo"
               className="rounded-full "
               height={80}
-              src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+              src={session?.user?.image ?? ""}
               width={80}
             />
+
             <div className="flex flex-col justify-start space-y-0">
-              <div className="text-sm text-default-600">Welcome back,</div>
-              <div className="text-xl font-bold">Quang Huy</div>
+              <div className="text-default-6000 text-sm">Welcome back,</div>
+              <div className="text-xl font-bold">
+                {session?.user?.name ?? ""}
+              </div>
               <div className="text-sm text-default-600">
                 To the Soma Capital Platform
               </div>
