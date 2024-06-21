@@ -55,11 +55,11 @@ export const Companies = ({
       {data?.map((company) => (
         <div key={company.id}>
           <SingleCompany
-            companyUrl={company.websiteUrl as string}
+            companyUrl={company.websiteUrl}
             companyLogo={company.logoUrl ? company.logoUrl : ""}
             companyName={company.name}
             oneLiner={company.oneLiner}
-            industry={company.sectors[0]?.name as string}
+            industry={company.sectors[0]?.name ?? ""}
             region={company.region}
           />
         </div>

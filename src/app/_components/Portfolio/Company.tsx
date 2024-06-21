@@ -38,12 +38,12 @@ const Company = () => {
             <TableColumn>Valuation</TableColumn>
           </TableHeader>
           <TableBody>
-            {(data || []).map((company) => (
-              <TableRow>
+            {(data ?? []).map((company) => (
+              <TableRow key={company.id}>
                 <TableCell>
                   <div className="flex flex-row items-center gap-2">
                     <Image
-                      src={company.logoUrl || ""}
+                      src={company.logoUrl ?? ""}
                       alt="Company Logo"
                       width={45}
                       height={45}
@@ -66,7 +66,7 @@ const Company = () => {
                     }}
                     radius="sm"
                   >
-                    {company.sectors[0]?.name || ""}
+                    {company.sectors[0]?.name ?? ""}
                   </Chip>
                 </TableCell>
                 <TableCell className="font-medium text-gray-400">

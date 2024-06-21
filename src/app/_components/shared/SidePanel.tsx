@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const SidePanel = () => {
   const router = useRouter();
   const [activeButton, setActiveButton] = useState<string>(() => {
-    return localStorage.getItem('activeButton') || "Home";
+    return localStorage.getItem('activeButton') ?? "Home";
   });
   const pathname = usePathname();
    // Update local storage when activeButton changes

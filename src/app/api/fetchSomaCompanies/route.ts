@@ -20,12 +20,17 @@ interface DataResult {
 }
 
 export async function GET(request: NextRequest) {
-  const initialUrl =
-    "https://somacap.com/api/trpc/companies.getCompaniesInfiniteQueryWithFilters?batch=1&input=%7B%220%22%3A%7B%22json%22%3A%7B%22limit%22%3A30%2C%22industry%22%3Anull%2C%22region%22%3Anull%2C%22cursor%22%3Anull%7D%2C%22meta%22%3A%7B%22values%22%3A%7B%22cursor%22%3A%5B%22undefined%22%5D%7D%7D%7D%7D"; // Set your initial URL here
-  const results: CompanyDataType[] = [];
-  await fetchDataAndPushToArray("", results, initialUrl);
-  saveCompaniesToDB(results);
-  return NextResponse.json(results);
+  try {
+    const initialUrl =
+      "https://somacap.com/api/trpc/companies.getCompaniesInfiniteQueryWithFilters?batch=1&input=%7B%220%22%3A%7B%22json%22%3A%7B%22limit%22%3A30%2C%22industry%22%3Anull%2C%22region%22%3Anull%2C%22cursor%22%3Anull%7D%2C%22meta%22%3A%7B%22values%22%3A%7B%22cursor%22%3A%5B%22undefined%22%5D%7D%7D%7D%7D"; // Set your initial URL here
+    const results: CompanyDataType[] = [];
+    await fetchDataAndPushToArray("", results, initialUrl);
+    await saveCompaniesToDB(results);
+    return NextResponse.json(results);
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json({ error: "Failed to fetch and save companies" });
+  }
 }
 
 async function fetchDataAndPushToArray(
@@ -36,9 +41,9 @@ async function fetchDataAndPushToArray(
   const url = cursor ? BaseUrl(encodeURL(stringToEncode(cursor))) : initialUrl;
   const data = (await fetchDataFromURL(url!)) as DataResult[];
   if (data?.[0]?.result?.data?.json?.nextCursor) {
-    results.push(...data[0].result.data.json.results); 
+    results.push(...data[0].result.data.json.results);
     if (data[0].result.data.json.results) {
-      results.push(...data[0].result.data.json.results); 
+      results.push(...data[0].result.data.json.results);
     }
     if (data[0].result.data.json.nextCursor) {
       await fetchDataAndPushToArray(
@@ -50,7 +55,6 @@ async function fetchDataAndPushToArray(
 }
 
 async function saveCompaniesToDB(result: CompanyDataType[]) {
-     
   const limitedResults = result.slice(0, 200);
   for (const company of limitedResults) {
     try {
@@ -78,21 +82,21 @@ async function saveCompaniesToDB(result: CompanyDataType[]) {
           websiteUrl: company.website,
         },
       });
-       // Upsert sectors related to the company
-       if (company.sectors && company.sectors.length > 0) {
+      // Upsert sectors related to the company
+      if (company.sectors && company.sectors.length > 0) {
         for (const sector of company.sectors) {
           await db.sectors.upsert({
             where: { id: sector.id },
             update: {
               name: sector.name,
               primary: sector.primary,
-              companyId: sector.companyId, 
+              companyId: sector.companyId,
             },
             create: {
               id: sector.id,
               name: sector.name,
               primary: sector.primary,
-              companyId: sector.companyId, 
+              companyId: sector.companyId,
             },
           });
         }
