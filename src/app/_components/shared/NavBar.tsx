@@ -19,8 +19,14 @@ const NavBar = () => {
     setActiveItem(item);
   };
   useEffect(() => {
+    // if (activeItem === "Portfolio") {
+    //   router.push("/");
+    // }
     if (activeItem === "Sign In") {
       router.push("/login");
+    }
+    if (activeItem === "Team") {
+      router.push("/team");
     }
   }, [activeItem]);
   return (
@@ -48,10 +54,10 @@ const NavBar = () => {
             >
               <Link
                 color="foreground"
-                href={"#"}
                 onPress={() => {
                   handleItemClick(item);
                 }}
+                className="cursor-pointer"
               >
                 {item}
               </Link>
