@@ -92,3 +92,12 @@ model Sectors {
     name      String
     primary   Boolean
 }
+
+model Teams {
+    id       String  @id @unique @default(cuid())
+    name     String
+    role     String
+    imageUrl String
+    slug     String  @unique
+    bio      String  @db.Text
+}
