@@ -8,7 +8,7 @@ const Teams = () => {
     return (
       <div className=" mx-auto max-w-screen-lg px-6">
         <div className="grid grid-cols-5 gap-4">
-          {[...Array(10)].map((_, i) => (
+          {[...Array<number>(10)].map((_, i) => (
             <SinglePersonSkeleton key={i} />
           ))}
         </div>
