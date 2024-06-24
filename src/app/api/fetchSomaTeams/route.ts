@@ -16,10 +16,10 @@ interface TeamData {
   };
 }
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   try {
     const url =
-      "https://somacap.com/_next/data/HkO4BFUkGoc8_uWY0inu4/team.json";
+      "https://somacap.com/_next/data/mRe7QlFtGE6jWg64Ovwck/team.json";
     const data = (await fetchDataFromURL(url)) as TeamData;
     const teams: Team[] = data.pageProps.team;
     console.log("running here");
