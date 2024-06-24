@@ -17,16 +17,18 @@ interface TeamData {
 }
 
 export async function GET(req: NextRequest, res: NextResponse) {
-  const url = "https://somacap.com/_next/data/HkO4BFUkGoc8_uWY0inu4/team.json";
-  const data = await fetchDataFromURL(url) as TeamData;
-  const teams: Team[] = data.pageProps.team;
   try {
+    const url =
+      "https://somacap.com/_next/data/HkO4BFUkGoc8_uWY0inu4/team.json";
+    const data = (await fetchDataFromURL(url)) as TeamData;
+    const teams: Team[] = data.pageProps.team;
     console.log("running here");
     await saveTeamsToDB(teams);
+    return NextResponse.json(data.pageProps.team);
   } catch (e) {
-    throw new Error("Failed to save teams to database");
+    throw new Error(e as string);
   }
-  return NextResponse.json(data.pageProps.team);
+  
 }
 
 async function saveTeamsToDB(teams: Team[]) {
@@ -49,6 +51,7 @@ async function saveTeamsToDB(teams: Team[]) {
       }
     } catch (e) {
       console.error("Failed to save team:", e);
+      throw e;
     }
   }
 }
