@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 const PortfolioPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  if (status === "authenticated") {
+  if (status === "unauthenticated") {
     router.push("/login");
   }
   return (
