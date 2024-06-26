@@ -7,7 +7,8 @@ export const Unicorns = ({
     value,
     companyLogo,
     companyName,
-    description
+    description,
+    onClick
   }: {
     location: string;
     industry: string;
@@ -15,11 +16,12 @@ export const Unicorns = ({
     companyLogo: string;
     companyName: string;
     description: string;
+    onClick: () => void;
   }) => {
     return (
       <div className="border-b-1 border-gray-200">
         <div className="mx-5 my-3 flex flex-row items-center justify-between space-x-2 ">
-          <div className="flex flex-row items-center space-x-2">
+          <div className="flex flex-row items-center space-x-2 cursor-pointer" onClick={onClick}>
             <Image
               src={companyLogo}
               alt="unicorn"
@@ -35,7 +37,7 @@ export const Unicorns = ({
   
           <div className="flex flex-row items-center space-x-9">
             <div className="text-base font-medium">{location}</div>
-            <div className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-600">
+            <div className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-600 text-nowrap">
               {industry}
             </div>
             <div className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-600">
