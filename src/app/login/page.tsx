@@ -11,7 +11,7 @@ const LoginPage = () => {
     try {
       await signIn("google", {
         redirect: true,
-        callbackUrl: "http://localhost:3000/dashboard/home",
+        callbackUrl: "/dashboard/home",
       });
       localStorage.removeItem("activeItem");
     } catch (e) {

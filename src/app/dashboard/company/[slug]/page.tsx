@@ -8,7 +8,7 @@ import FetchCompanyInformation from "~/app/_components/SingleCompany/FetchCompan
 import FetchCompanyLogo from "~/app/_components/SingleCompany/FetchCompanyLogo";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// TODO: 404 if param invalid
+
 const SingleCompany = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const { data: session, status } = useSession();

@@ -9,7 +9,7 @@ const CustomChips = ({number}: {number: number}) => {
         </div>
     )
 }
-// TODO: chips in company tab
+
 
 const SignleCompanyTabs = () => {
   return (
