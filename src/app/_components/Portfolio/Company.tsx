@@ -14,8 +14,9 @@ import { getRandomDateAsString } from "../shared/RandomDate";
 import { api } from "~/trpc/react";
 import { useAppContext } from "~/app/_components/context";
 import { Skeleton } from "@nextui-org/react";
-
+import { useRouter } from "next/navigation";
 const Company = () => {
+  const router = useRouter();
   const {
     portforlioIndustrySelected,
     portforlioValuationSelected,
@@ -26,7 +27,9 @@ const Company = () => {
     industry: portforlioIndustrySelected,
     region: portforlioRegionSelected,
   });
-  
+  const onClick = (companyId: string) => {
+    router.push(`/dashboard/company/${companyId}`);
+  }
 
   return (
     <>
@@ -82,7 +85,7 @@ const Company = () => {
               : (data ?? []).map((company) => (
                   <TableRow key={company.id}>
                     <TableCell>
-                      <div className="flex flex-row items-center gap-2">
+                      <div className="flex flex-row items-center gap-2 cursor-pointer" onClick={() => onClick(company.id)}>
                         <Image
                           src={company.logoUrl ?? ""}
                           alt="Company Logo"

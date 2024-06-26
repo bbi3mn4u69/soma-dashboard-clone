@@ -11,7 +11,9 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 const NavBar = () => {
+  const { data: session } = useSession();
   const [activeItem, setActiveItem] = useState<string>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("activeItem") ?? "Portfolio";
@@ -36,6 +38,10 @@ const NavBar = () => {
     if (activeItem === "Team") {
       router.push("/team");
     }
+    if (activeItem === "Dashboard") {
+      router.push("/dashboard/home");
+      localStorage.removeItem("activeItem");
+    }
   }, [activeItem]);
   return (
     <div>
@@ -54,7 +60,7 @@ const NavBar = () => {
             "News",
             "Jobs",
             "Fellowship",
-            "Sign In",
+            session ? "Dashboard" : "Sign In",
           ].map((item) => (
             <NavbarItem
               key={item}

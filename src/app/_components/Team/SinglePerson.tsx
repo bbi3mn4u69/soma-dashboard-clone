@@ -23,6 +23,7 @@ export const SinglePerson = ({
         className="rounded-2xl transition-all duration-300 hover:scale-110 cursor-pointer"
         onClick={() => {
             router.push(personRoute)
+            localStorage.setItem("activeItem", "null");
         }}
       />
       <div className="flex flex-col gap-0">

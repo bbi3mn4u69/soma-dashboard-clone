@@ -1,17 +1,21 @@
 import { CompanyInformation } from "./CompanyInformation";
 import { api } from "~/trpc/react";
 import { useAppContext } from "../context";
+import { notFound } from "next/navigation";
 const FetchCompanyInfor = ({companyId}: {companyId: string}) => {
   if (companyId) {
-    const { data: company } = api.companySlug.getSpecificCompany.useQuery({
+    const { data: company, isLoading: companyLoading} = api.companySlug.getSpecificCompany.useQuery({
       companyId: companyId,
     });
-    const {data: primarySector} = api.companySlug.getCompanyPrimarySector.useQuery({
+    const {data: primarySector, isLoading: primarySectorLoading} = api.companySlug.getCompanyPrimarySector.useQuery({
       companyId: companyId
     })
-    const {data: otherSectors} = api.companySlug.getCompanyOtherSector.useQuery({
+    const {data: otherSectors, isLoading: otherSectorsLoading} = api.companySlug.getCompanyOtherSector.useQuery({
       companyId: companyId
     })
+    if (!company && !companyLoading) {
+      return notFound();
+    }
 
     if (company && primarySector && otherSectors) {
       return (
