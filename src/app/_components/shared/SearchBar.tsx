@@ -18,6 +18,7 @@ const SearchBar = () => {
   const router = useRouter();
   const onClick = async () => {
     await signOut({ redirect: true, callbackUrl: "/" });
+    localStorage.removeItem("activeItem");
   };
   return (
     <>
