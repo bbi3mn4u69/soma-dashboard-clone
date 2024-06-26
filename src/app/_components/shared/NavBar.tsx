@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 const NavBar = () => {
   const [activeItem, setActiveItem] = useState<string>(() => {
-    return localStorage.getItem("activeItem") || "Portfolio";
+    return localStorage.getItem("activeItem") ?? "Portfolio";
   });
   const router = useRouter();
 

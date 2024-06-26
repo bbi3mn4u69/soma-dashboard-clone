@@ -10,7 +10,7 @@ const SidePanel = () => {
   const router = useRouter();
   const [activeButton, setActiveButton] = useState<string>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('activeButton') || "Home";
+      return localStorage.getItem('activeButton') ?? "Home";
     }
     return "Home";
   });

@@ -54,7 +54,7 @@ const Company = () => {
           </TableHeader>
           <TableBody>
             {isLoading
-              ? [...Array(10)].map((_, index) => (
+              ? [...Array<number>(10)].map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       <div className="flex flex-row items-center gap-2">

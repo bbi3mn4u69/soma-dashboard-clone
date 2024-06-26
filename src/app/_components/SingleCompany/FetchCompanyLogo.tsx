@@ -10,7 +10,7 @@ const FetchCompanyLogo = ({ companyId }: { companyId: string }) => {
         return (
             <>
               <CompanyLogo
-                companyLogo={company.logoUrl!}
+                companyLogo={company.logoUrl}
                 companyName={company.name}
               />
             </>
