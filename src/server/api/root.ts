@@ -4,6 +4,7 @@ import { GetCompanyRouter } from "~/server/api/routers/company";
 import { DashboardHomeRoute } from "~/server/api/routers/dashboard-home";
 import { dashboardPortfolioRouter } from "~/server/api/routers/dashboard-portfolio";
 import { TeamsRouter } from "~/server/api/routers/teams";
+import { companySlugRouter } from "~/server/api/routers/company-slug";
 /**
  * This is the primary router for your server.
  *
@@ -14,7 +15,8 @@ export const appRouter = createTRPCRouter({
   company: GetCompanyRouter,
   dashboardHome: DashboardHomeRoute,
   dashboardPortfolio: dashboardPortfolioRouter,
-  teams: TeamsRouter
+  teams: TeamsRouter,
+  companySlug: companySlugRouter
 });
 
 // export type definition of API
