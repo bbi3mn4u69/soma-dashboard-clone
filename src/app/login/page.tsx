@@ -4,9 +4,15 @@ import SomaLogo from "../image/soma.png";
 import Google from "../image/google.png";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 const LoginPage = () => {
+  const { data: session } = useSession();
   const router = useRouter();
+
+  if (session) {
+    router.push("/dashboard/home");
+  }
+  
   const onClick = async () => {
     try {
       await signIn("google", {
@@ -17,6 +23,9 @@ const LoginPage = () => {
       console.log(e);
     }
   };
+  
+ 
+
   return (
     <>
       <div className="flex min-h-screen items-center justify-center bg-gray-100 ">
