@@ -54,7 +54,7 @@ const UserCard = () => {
               className="border-1 font-medium"
               startContent={<Rocket />}
             >
-              Discorver a top company
+              Discover a top company
             </Button>
             <Button
               size="sm"
