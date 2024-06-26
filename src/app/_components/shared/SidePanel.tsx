@@ -8,10 +8,17 @@ import { usePathname } from "next/navigation";
 
 const SidePanel = () => {
   const router = useRouter();
-  const [activeButton, setActiveButton] = useState<string>("Home");
+  const [activeButton, setActiveButton] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('activeButton') || "Home";
+    }
+    return "Home";
+  });
   const pathname = usePathname();
    // Update local storage when activeButton changes
-
+   useEffect(() => {
+    localStorage.setItem('activeButton', activeButton);
+  }, [activeButton]);
   return (
     <>
       <div className="min-h-screen bg-purple-900">

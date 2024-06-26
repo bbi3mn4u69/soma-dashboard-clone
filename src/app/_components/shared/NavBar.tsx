@@ -12,16 +12,21 @@ import {
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 const NavBar = () => {
-  const [activeItem, setActiveItem] = useState<string>("Portfolio");
+  const [activeItem, setActiveItem] = useState<string>(() => {
+    return localStorage.getItem("activeItem") || "Portfolio";
+  });
   const router = useRouter();
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
   };
   useEffect(() => {
-    // if (activeItem === "Portfolio") {
-    //   router.push("/");
-    // }
+    localStorage.setItem("activeItem", activeItem);
+  }, [activeItem]);
+  useEffect(() => {
+    if (activeItem === "Portfolio") {
+      router.push("/");
+    }
     if (activeItem === "Sign In") {
       router.push("/login");
     }
