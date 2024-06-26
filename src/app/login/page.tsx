@@ -3,22 +3,17 @@ import Image from "next/image";
 import SomaLogo from "../image/soma.png";
 import Google from "../image/google.png";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 const LoginPage = () => {
   const { data: session } = useSession();
-  const router = useRouter();
-
-  if (session) {
-    router.push("/dashboard/home");
-  }
   
   const onClick = async () => {
     try {
       await signIn("google", {
         redirect: true,
-        callbackUrl: "/dashboard/home",
+        callbackUrl: "http://localhost:3000/dashboard/home",
       });
+      localStorage.removeItem("activeItem");
     } catch (e) {
       console.log(e);
     }

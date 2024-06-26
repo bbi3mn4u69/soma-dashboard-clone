@@ -6,9 +6,18 @@ import { SessionProvider } from "next-auth/react";
 import SignleCompanyTabs from "~/app/_components/SingleCompany/Tabs";
 import FetchCompanyInformation from "~/app/_components/SingleCompany/FetchCompanyInformation";
 import FetchCompanyLogo from "~/app/_components/SingleCompany/FetchCompanyLogo";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 // TODO: 404 if param invalid
 const SingleCompany = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  if (status === "unauthenticated") {
+    router.push("/login");
+  }
+
   return (
     <>
       <SessionProvider>

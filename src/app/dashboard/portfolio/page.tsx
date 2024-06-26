@@ -6,8 +6,15 @@ import HeroTabs from "~/app/_components/Portfolio/Tabs";
 import Filter from "~/app/_components/Portfolio/Filter";
 import Company from "~/app/_components/Portfolio/Company";
 import TopChips from "~/app/_components/Portfolio/Chips";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const PortfolioPage = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  if (status === "authenticated") {
+    router.push("/login");
+  }
   return (
     <SessionProvider>
       <div className="h-screen bg-slate-50">

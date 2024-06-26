@@ -6,9 +6,15 @@ import UserCard from "../../_components/DashBoard/UserCard";
 import SomaNews from "../../_components/DashBoard/SomaNews";
 import UnicornBreakouts from "../../_components/DashBoard/UnicornBreakouts";
 import RecentInvest from "../../_components/DashBoard/RecentInvestment";
-
-
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const DashboardPage = () => {
+  const { data: session, status} = useSession();
+  const router = useRouter();
+  if (status === "unauthenticated") {
+    router.push("/login");
+    return <></>;
+  }
   return (
     <SessionProvider>
       <div className="h-screen bg-slate-50">
