@@ -83,6 +83,7 @@ model Company {
     region     String
     websiteUrl String
     sectors    Sectors[]
+    news       CompanyNews[]
 }
 
 model Sectors {
@@ -100,4 +101,18 @@ model Teams {
     imageUrl String
     slug     String  @unique
     bio      String  @db.Text
+}
+
+model CompanyNews {
+    id String @id @unique @default(cuid())
+    companyId String
+    company Company @relation(fields: [companyId], references: [id])
+    companyRelated String
+    title String
+    url String
+    content String?
+    publishedAt String?
+    source String
+    articleLogoUrl String?
+    ProviderName String?
 }
