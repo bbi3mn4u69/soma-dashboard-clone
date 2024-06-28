@@ -8,8 +8,11 @@ import FetchCompanyInformation from "~/app/_components/SingleCompany/FetchCompan
 import FetchCompanyLogo from "~/app/_components/SingleCompany/FetchCompanyLogo";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import CompanyNews from "~/app/_components/SingleCompany/CompanyNews";
+import { useAppContext } from "~/app/_components/context";
 
 const SingleCompany = ({ params }: { params: { slug: string } }) => {
+  const { tabSelected } = useAppContext();
   const { slug } = params;
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -32,9 +35,15 @@ const SingleCompany = ({ params }: { params: { slug: string } }) => {
                 <FetchCompanyLogo companyId={slug}></FetchCompanyLogo>
                 <SignleCompanyTabs></SignleCompanyTabs>
                 <div>
-                  <FetchCompanyInformation
-                    companyId={slug}
-                  ></FetchCompanyInformation>
+                  {tabSelected === "$.0" ? (
+                    <FetchCompanyInformation
+                      companyId={slug}
+                    ></FetchCompanyInformation>
+                  ) : tabSelected === "$.1" ? (
+                    <CompanyNews companyId={slug}></CompanyNews>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

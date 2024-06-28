@@ -1,17 +1,16 @@
 import { Tabs, Tab } from "@nextui-org/react";
+import { useAppContext } from "../context";
+import { useEffect } from "react";
 
-
-
-const CustomChips = ({number}: {number: number}) => {
-    return (
-        <div className="text-xs px-1 text-gray-400 bg-gray-300">
-            {number}
-        </div>
-    )
-}
-
+const CustomChips = ({ number }: { number: number }) => {
+  return <div className="bg-gray-300 px-1 text-xs text-gray-400">{number}</div>;
+};
 
 const SignleCompanyTabs = () => {
+  const { tabSelected, setTabSelected } = useAppContext();
+  useEffect(() => {
+    console.log(tabSelected);
+  }, [tabSelected]);
   return (
     <>
       <div className="px-7 pb-7">
@@ -27,8 +26,9 @@ const SignleCompanyTabs = () => {
               tabContent:
                 "group-data-[selected=true]:text-purple-500 font-medium  rounded-md px-3 py-2 text-sm",
             }}
+            onSelectionChange={(key: React.Key) => setTabSelected(key.toString())}
           >
-            <Tab title="About"  />
+            <Tab title="About" />
             <Tab title="Company News" />
             <Tab title="Activities" />
           </Tabs>

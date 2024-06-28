@@ -79,5 +79,22 @@ export const companySlugRouter = createTRPCRouter({
         }catch(e) {
           console.log(e)
         }
+      }),
+      getCompanyNews: protectedProcedure
+      .input(
+        z.object({
+          companyId: z.string()
+        })
+      ).query(async ({ctx, input}) => {
+        try {
+          const companyNews = await ctx.db.companyNews.findMany({
+            where: {
+              companyId: input.companyId
+            }
+          })
+          return companyNews
+        } catch (e) {
+          console.log(e)
+        }
       })
 });
