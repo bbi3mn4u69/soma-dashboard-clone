@@ -12,6 +12,9 @@ interface AppContextProps {
   setPortforlioIndustrySelected: React.Dispatch<React.SetStateAction<string>>;
   portforlioRegionSelected: string;
   setPortforlioRegionSelected: React.Dispatch<React.SetStateAction<string>>;
+  // Signle Company Page:
+  tabSelected: string;
+  setTabSelected: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -24,6 +27,8 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     useState<string>("All");
   const [portforlioRegionSelected, setPortforlioRegionSelected] =
     useState<string>("All");
+    
+  const [tabSelected, setTabSelected] = useState<string>("$.0");
 
   const value = {
     industriesSelected,
@@ -36,6 +41,8 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setPortforlioIndustrySelected,
     portforlioRegionSelected,
     setPortforlioRegionSelected,
+    tabSelected,
+    setTabSelected,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
