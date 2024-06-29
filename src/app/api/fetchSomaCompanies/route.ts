@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
 
     await fetchDataAndPushToArray("", results, initialUrl);
     await saveCompaniesToDB(results);
-    return NextResponse.json(results);
+    return NextResponse.json("result oke");
   } catch (e) {
     console.log(e);
     return NextResponse.json({ error: "Failed to fetch and save companies" });
