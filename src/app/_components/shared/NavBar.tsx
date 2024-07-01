@@ -70,7 +70,7 @@ const NavBar = () => {
           className="hidden gap-x-5 text-sm font-semibold leading-6 sm:flex"
           justify="end"
         >
-          <NavbarMenu>
+          <NavbarMenu className="bg-white">
             {[
               "Portfolio",
               "About Us",
