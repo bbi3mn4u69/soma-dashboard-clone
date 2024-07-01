@@ -5,8 +5,9 @@ import { Home, Portfolio, Infor, Feed, Saved, Admin, Stock } from "../Icon";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-
+import { useAppContext } from "../context";
 const SidePanel = () => {
+  const { isMobileSideBarOpen } = useAppContext();
   const router = useRouter();
   const [activeButton, setActiveButton] = useState<string>(() => {
     if (typeof window !== 'undefined') {
@@ -21,7 +22,7 @@ const SidePanel = () => {
   }, [activeButton]);
   return (
     <>
-      <div className="min-h-screen bg-purple-900">
+      <div className={`min-h-screen bg-purple-900 ${isMobileSideBarOpen ? "block" : "hidden"} sm:block `}>
         <div className="flex items-center justify-center py-4">
           <GrayLogo />
         </div>
