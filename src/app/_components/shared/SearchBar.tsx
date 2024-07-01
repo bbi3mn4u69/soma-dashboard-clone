@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@nextui-org/react";
-import { QuestionMark } from "../Icon";
+import { QuestionMark, MobileMenu } from "../Icon";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Profile from "../../image/profile.webp";
@@ -13,17 +13,30 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { useAppContext } from "../context";
+
 const SearchBar = () => {
+  const { isMobileSideBarOpen, setIsMobileSideBarOpen } = useAppContext();
   const { data: session } = useSession();
   const router = useRouter();
   const onClick = async () => {
     await signOut({ redirect: true, callbackUrl: "/" });
     localStorage.removeItem("activeItem");
   };
+
+  const sideBarOnClick = () => {
+    setIsMobileSideBarOpen(!isMobileSideBarOpen);
+  };
   return (
     <>
       <div className="border border-b border-gray-200 bg-white">
         <div className="mx-4 my-2 flex flex-row items-center justify-between ">
+          {/* button for mobile view */}
+          <div className="pr-5 sm:hidden">
+            <Button  isIconOnly variant="faded" className="bg-transparent" onPress={sideBarOnClick} >
+              <MobileMenu />
+            </Button>
+          </div>
           {/* input */}
           <div className="mr-4 w-full">
             <Input
