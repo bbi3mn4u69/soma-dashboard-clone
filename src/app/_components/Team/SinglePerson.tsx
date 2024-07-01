@@ -5,14 +5,14 @@ export const SinglePerson = ({
   personImage,
   personName,
   personPosition,
-  personRoute
+  personRoute,
 }: {
   personImage: string;
   personName: string;
   personPosition: string;
   personRoute: string;
 }) => {
-    const router = useRouter()
+  const router = useRouter();
   return (
     <div className="flex flex-col justify-start gap-3">
       <Image
@@ -20,10 +20,10 @@ export const SinglePerson = ({
         alt="placeholder"
         width={200}
         height={200}
-        className="rounded-2xl transition-all duration-300 hover:scale-110 cursor-pointer"
+        className="cursor-pointer rounded-2xl transition-all duration-300 hover:scale-110"
         onClick={() => {
-            router.push(personRoute)
-            localStorage.setItem("activeItem", "null");
+          router.push(personRoute);
+          localStorage.setItem("activeItem", "null");
         }}
       />
       <div className="flex flex-col gap-0">

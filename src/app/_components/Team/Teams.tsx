@@ -7,7 +7,7 @@ const Teams = () => {
   if (isLoading) {
     return (
       <div className=" mx-auto max-w-screen-lg px-6">
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {[...Array<number>(10)].map((_, i) => (
             <SinglePersonSkeleton key={i} />
           ))}
@@ -17,8 +17,8 @@ const Teams = () => {
   }
   return (
     <>
-      <div className=" mx-auto max-w-screen-lg px-6">
-        <div className="grid grid-cols-5 gap-4">
+      <div className=" mx-auto max-w-screen-lg px-0 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {data?.map((team) => (
             <SinglePerson
               key={team.id}
