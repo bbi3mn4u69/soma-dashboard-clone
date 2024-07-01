@@ -21,13 +21,13 @@ export const SingleCompany = ({
     <>
       <div className=" mx-auto max-w-screen-lg border-b border-gray-200  px-6 py-2">
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center gap-3">
+          <div className="flex flex-row items-center gap-3 overflow-hidden whitespace-nowrap text-ellipsis" >
             <Image
               src={companyLogo}
               alt="Company Logo"
               width={50}
               height={50}
-              className="size-6 min-h-6 min-w-6 rounded"
+              className="size-6 min-h-6 min-w-6 rounded hidden sm:flex"
             />
             <Link href={companyUrl} passHref legacyBehavior>
               <a
@@ -38,11 +38,11 @@ export const SingleCompany = ({
               </a>
             </Link>
 
-            <div className="text-sm font-light text-gray-400 lg:w-[550px]">
+            <div className="text-sm font-light text-gray-400 lg:w-[550px] md:w-[350px] w-full overflow-hidden whitespace-nowrap text-ellipsis ">
               {oneLiner}
             </div>
           </div>
-          <div className="flex w-36 flex-row items-center justify-between text-nowrap text-center text-sm font-light text-gray-400">
+          <div className="sm:flex w-36 flex-row items-center justify-between text-nowrap text-center text-sm font-light text-gray-400 hidden ">
             <div>{industry}</div>
             <div>{region}</div>
           </div>
