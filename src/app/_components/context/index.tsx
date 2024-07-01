@@ -15,6 +15,11 @@ interface AppContextProps {
   // Signle Company Page:
   tabSelected: string;
   setTabSelected: React.Dispatch<React.SetStateAction<string>>;
+  // Mobile Filter:
+  isMobileFilterOpen: boolean;
+  setIsMobileFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobileSideBarOpen: boolean;
+  setIsMobileSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -29,8 +34,14 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     useState<string>("All");
     
   const [tabSelected, setTabSelected] = useState<string>("$.0");
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
+  const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState<boolean>(false);
 
   const value = {
+    isMobileSideBarOpen,
+    setIsMobileSideBarOpen,
+    isMobileFilterOpen,
+    setIsMobileFilterOpen,
     industriesSelected,
     setIndustriesSelected,
     regionsSelected,
