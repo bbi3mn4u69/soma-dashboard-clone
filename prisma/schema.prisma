@@ -109,7 +109,7 @@ model CompanyNews {
     company Company @relation(fields: [companyId], references: [id])
     companyRelated String
     title String
-    url String
+    url String @unique
     content String?
     publishedAt String?
     source String
