@@ -12,7 +12,7 @@ const UnicornBreakouts = () => {
     router.push(`/dashboard/company/${companyId}`);
   };
   return (
-    <Card className="flex w-full flex-col bg-white p-5">
+    <Card className=" flex w-full flex-col bg-white p-5" radius="sm">
       <CardHeader>
         <div className="pb-3 text-base font-medium">
           Soma Top Unicorn Breakouts

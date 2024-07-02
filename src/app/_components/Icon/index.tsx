@@ -7,7 +7,7 @@ export const Home = ({ active }: { active: boolean }) => {
         viewBox="0 0 24 24"
         strokeWidth={2}
         stroke={active ? "#fff" : "#8b8d97"}
-        className="size-5"
+        className="size-4 sm:size-5"
       >
         <path
           strokeLinecap="round"

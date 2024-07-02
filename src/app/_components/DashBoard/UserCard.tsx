@@ -25,7 +25,7 @@ const UserCard = () => {
   return (
     <div>
       <Card radius="sm" shadow="sm">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center justify-start ">
           {/* user */}
           <div className="m-2 flex flex-row items-center gap-5">
             <Image
@@ -67,7 +67,7 @@ const UserCard = () => {
           </div>
         </CardHeader>
         <CardFooter className="bg-slate-100 p-0">
-          <div className="grid w-full grid-cols-3 items-center">
+          <div className="lg:grid w-full grid-cols-3 items-center hidden ">
             <GridItem value="880+" title="Porfolior companies" />
             <GridItem value="880+" title="Porfolior companies" />
             <GridItem value="880+" title="Porfolior companies" />
