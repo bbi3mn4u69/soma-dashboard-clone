@@ -17,19 +17,19 @@ const DashboardPage = () => {
   }
   return (
     <SessionProvider>
-      <div className="h-screen bg-slate-50">
-        <div className="flex h-full flex-row justify-start">
+      <div className="h-screen w-screen bg-slate-50">
+        <div className="flex h-full w-full flex-row justify-center">
           <div>
             <SidePanel />
           </div>
           <div className="flex h-full w-full flex-col">
             <SearchBar />
-            <div className="flex flex-grow flex-row overflow-hidden p-7">
+            <div className="flex flex-grow flex-col space-y-3 sm:space-y-0 sm:flex-row sm:overflow-hidden sm:p-7 p-3 overflow-y-scroll">
               <div className="flex flex-grow flex-col space-y-3">
                 <UserCard />
                 <UnicornBreakouts />
               </div>
-              <div className="flex w-full max-w-md flex-col space-y-3 pl-7 2xl:max-w-lg">
+              <div className="flex w-full max-w-md flex-col space-y-3  sm:pl-7 2xl:max-w-lg">
                 <SomaNews />
                 <RecentInvest />
               </div>

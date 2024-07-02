@@ -8,6 +8,7 @@ import Company from "~/app/_components/Portfolio/Company";
 import TopChips from "~/app/_components/Portfolio/Chips";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import MobileFilterModal from "~/app/_components/Portfolio/MobileFilterModal";
 
 const PortfolioPage = () => {
   const { data: session, status } = useSession();
@@ -17,6 +18,7 @@ const PortfolioPage = () => {
   }
   return (
     <SessionProvider>
+      <MobileFilterModal />
       <div className="h-screen bg-slate-50">
         <div className="flex h-full flex-row justify-start">
           <div>
@@ -24,12 +26,12 @@ const PortfolioPage = () => {
           </div>
           <div className="flex h-full w-full flex-col">
             <SearchBar />
-            <div className="flex flex-col space-y-4 p-7">
+            <div className="flex flex-col space-y-4 sm:p-7 p-3">
               <HeroTabs />
               <TopChips />
             </div>
-            <div className="flex h-dvh flex-grow flex-row space-x-9 overflow-y-scroll pt-1">
-              <div className="sticky top-0">
+            <div className="flex h-dvh flex-grow flex-row sm:space-x-9 space-x-3 overflow-y-scroll pt-1">
+              <div className="sticky top-0 hidden sm:block">
                 <Filter />
               </div>
               <Company />
