@@ -12,6 +12,8 @@ interface AppContextProps {
   setPortforlioIndustrySelected: React.Dispatch<React.SetStateAction<string>>;
   portforlioRegionSelected: string;
   setPortforlioRegionSelected: React.Dispatch<React.SetStateAction<string>>;
+  isMobileFilterPortforlioOpen: boolean;
+  setIsMobileFilterPortforlioOpen: React.Dispatch<React.SetStateAction<boolean>>;
   // Signle Company Page:
   tabSelected: string;
   setTabSelected: React.Dispatch<React.SetStateAction<string>>;
@@ -20,6 +22,7 @@ interface AppContextProps {
   setIsMobileFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isMobileSideBarOpen: boolean;
   setIsMobileSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -36,8 +39,11 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [tabSelected, setTabSelected] = useState<string>("$.0");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState<boolean>(false);
+  const [isMobileFilterPortforlioOpen, setIsMobileFilterPortforlioOpen] = useState<boolean>(false);
 
   const value = {
+    isMobileFilterPortforlioOpen,
+    setIsMobileFilterPortforlioOpen,
     isMobileSideBarOpen,
     setIsMobileSideBarOpen,
     isMobileFilterOpen,
