@@ -22,7 +22,7 @@ const SidePanel = () => {
   }, [activeButton]);
   return (
     <>
-      <div className={`min-h-screen bg-purple-900 ${isMobileSideBarOpen ? "block" : "hidden"} sm:block `}>
+      <div className='min-h-screen bg-purple-900'>
         <div className="flex items-center justify-center py-4">
           <GrayLogo />
         </div>

@@ -29,14 +29,8 @@ const SearchBar = () => {
   };
   return (
     <>
-      <div className="border border-b border-gray-200 bg-white">
+      <div className="w-full border border-b border-gray-200 bg-white">
         <div className="mx-4 my-2 flex flex-row items-center justify-between ">
-          {/* button for mobile view */}
-          <div className="pr-5 sm:hidden">
-            <Button  isIconOnly variant="faded" className="bg-transparent" onPress={sideBarOnClick} >
-              <MobileMenu />
-            </Button>
-          </div>
           {/* input */}
           <div className="mr-4 w-full">
             <Input
@@ -44,11 +38,12 @@ const SearchBar = () => {
               type="email"
               variant="bordered"
               radius="sm"
+              className=""
               placeholder="Search for people and companies accross the entire Soma network"
             />
           </div>
           {/* infor hub */}
-          <div className="mx-2">
+          <div className="mx-2 hidden sm:block">
             <QuestionMark />
           </div>
           {/* TODO: logic to check for the user image. */}
