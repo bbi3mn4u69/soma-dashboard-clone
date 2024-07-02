@@ -17,6 +17,7 @@ const HeroTabs = () => {
             tabContent:
               "group-data-[selected=true]:text-violet-700 font-medium group-data-[selected=true]:bg-indigo-200 rounded-md px-3 py-2 text-sm",
           }}
+          className="hidden sm:block"
         >
           <Tab title="All companies" />
           <Tab title="In the news" />

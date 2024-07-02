@@ -33,8 +33,8 @@ const Company = () => {
 
   return (
     <>
-      <div className="h-full w-full pb-7 pr-7">
-        <Table aria-label="Example table with dynamic content">
+      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3">
+        <Table aria-label="Example table with dynamic content" className="overflow-x-auto">
           <TableHeader>
             <TableColumn>
               <div className="flex flex-row items-center gap-1">
@@ -52,7 +52,7 @@ const Company = () => {
               <div>Region</div>
             </TableColumn>
             <TableColumn>Industry</TableColumn>
-            <TableColumn>Investment Date</TableColumn>
+            <TableColumn className="hidden sm:block ">Investment Date</TableColumn>
             <TableColumn>Valuation</TableColumn>
           </TableHeader>
           <TableBody>
@@ -91,13 +91,13 @@ const Company = () => {
                           alt="Company Logo"
                           width={45}
                           height={45}
-                          className="rounded-md"
+                          className="rounded-md hidden sm:block"
                         />
                         <div className="flex flex-col gap-0">
                           <div className="text-sm font-medium">
                             {company.name}
                           </div>
-                          <div className="text-xs font-medium text-gray-400">
+                          <div className="text-xs font-medium text-gray-400 hidden sm:block">
                             {company.oneLiner}
                           </div>
                         </div>
@@ -117,7 +117,7 @@ const Company = () => {
                         {company.sectors[0]?.name ?? ""}
                       </Chip>
                     </TableCell>
-                    <TableCell className="font-medium text-gray-400">
+                    <TableCell className="font-medium text-gray-400 hidden sm:block">
                       {getRandomDateAsString(2010, 2024, "MM/DD/YYYY")}
                     </TableCell>
                     <TableCell>
