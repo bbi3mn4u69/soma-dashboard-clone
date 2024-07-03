@@ -39,8 +39,8 @@ const Filter = () => {
   } = useAppContext();
 
   return (
-    <div className="flex h-full flex-grow flex-col flex-nowrap space-y-3 overflow-y-scroll text-nowrap px-7 pb-7">
-      <div className="flex flex-col justify-start gap-2">
+    <div className="flex h-full flex-grow flex-col flex-nowrap space-y-3 overflow-y-scroll text-nowrap px-7 pb-7 w-fit">
+      <div className="flex sm:flex-col flex-row justify-start gap-2">
         <div className="text-start">
           <RadioGroup
             defaultValue="All"

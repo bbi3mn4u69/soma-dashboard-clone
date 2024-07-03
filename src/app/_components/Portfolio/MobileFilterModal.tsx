@@ -17,14 +17,14 @@ import {
     return (
       <>
         <div>
-          <Modal size="sm" isOpen={isMobileFilterPortforlioOpen} onOpenChange={setIsMobileFilterPortforlioOpen} className="h-screen">
+          <Modal size="sm" isOpen={isMobileFilterPortforlioOpen} onOpenChange={setIsMobileFilterPortforlioOpen} className="h-fit w-screen">
             <ModalContent>
               {(isMobileFilterPortforlioOpen) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
                     Filter List
                   </ModalHeader>
-                  <ModalBody className="overflow-y-scroll">
+                  <ModalBody className="overflow-scroll ">
                     <Filter />
                   </ModalBody>
                 </>

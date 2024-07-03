@@ -33,7 +33,7 @@ const Company = () => {
 
   return (
     <>
-      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3">
+      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3 max-w-[300px] lg:max-w-none">
         <Table aria-label="Example table with dynamic content" className="overflow-x-auto">
           <TableHeader>
             <TableColumn>
@@ -91,7 +91,7 @@ const Company = () => {
                           alt="Company Logo"
                           width={45}
                           height={45}
-                          className="rounded-md hidden sm:block"
+                          className="rounded-md hidden"
                         />
                         <div className="flex flex-col gap-0">
                           <div className="text-sm font-medium">

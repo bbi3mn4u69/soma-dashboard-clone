@@ -57,8 +57,8 @@ async function fetchDataAndPushToArray(
 }
 
 async function saveCompaniesToDB(result: CompanyDataType[]) {
-  const limitedResults = result.slice(0, 200);
-  for (const company of limitedResults) {
+  
+  for (const company of result) {
     try {
       await db.company.upsert({
         where: {
