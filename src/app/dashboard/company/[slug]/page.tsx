@@ -2,7 +2,6 @@
 
 import SidePanel from "../../../_components/shared/SidePanel";
 import SearchBar from "../../../_components/shared/SearchBar";
-import { SessionProvider } from "next-auth/react";
 import SignleCompanyTabs from "~/app/_components/SingleCompany/Tabs";
 import FetchCompanyInformation from "~/app/_components/SingleCompany/FetchCompanyInformation";
 import FetchCompanyLogo from "~/app/_components/SingleCompany/FetchCompanyLogo";

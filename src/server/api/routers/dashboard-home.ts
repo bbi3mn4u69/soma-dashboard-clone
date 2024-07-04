@@ -1,7 +1,4 @@
-import {
-  createTRPCRouter,
-  protectedProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const DashboardHomeRoute = createTRPCRouter({
   getDashboardHome: protectedProcedure.query(async ({ ctx }) => {
@@ -18,5 +15,15 @@ export const DashboardHomeRoute = createTRPCRouter({
       },
     });
     return companies;
+  }),
+  getRecentInvestment: protectedProcedure.query(async ({ ctx }) => {
+    try {
+      const recentInvestment = await ctx.db.company.findMany({
+        take: 6,
+      });
+      return recentInvestment;
+    } catch (e) {
+      console.log(e);
+    }
   }),
 });
