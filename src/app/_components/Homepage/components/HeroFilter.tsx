@@ -65,12 +65,6 @@ const HeroFilter = () => {
           <div className="flex w-fit flex-row flex-wrap justify-start gap-2">
             {[
               "All",
-              "SF",
-              "NYC",
-              "LA",
-              "Miami",
-              "Boston",
-              "Austin",
               "US",
               "Europe",
               "MENA",
