@@ -7,8 +7,12 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useAppContext } from "../context";
 const SidePanel = () => {
+  
   const { isMobileSideBarOpen } = useAppContext();
   const router = useRouter();
+  const logoClick = () => {
+    router.push("/");
+  }
   const [activeButton, setActiveButton] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('activeButton') ?? "Home";
@@ -23,7 +27,7 @@ const SidePanel = () => {
   return (
     <>
       <div className='min-h-screen bg-purple-900'>
-        <div className="flex items-center justify-center py-4">
+        <div className="flex items-center justify-center py-4 cursor-pointer " onClick={logoClick}>
           <GrayLogo />
         </div>
         <div className="mx-1 flex flex-col items-center justify-center">

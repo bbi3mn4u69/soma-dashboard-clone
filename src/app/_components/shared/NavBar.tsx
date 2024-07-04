@@ -42,6 +42,12 @@ const NavBar = () => {
     if (activeItem === "Team") {
       router.push("/team");
     }
+    if (activeItem === "About Us") {
+      router.push("/about");
+    }
+    if (activeItem === "Fellowship") {
+      router.push("https://somafellows.com/");
+    }
     if (activeItem === "Dashboard") {
       router.push("/dashboard/home");
       localStorage.removeItem("activeItem");

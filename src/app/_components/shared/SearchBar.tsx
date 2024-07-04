@@ -15,10 +15,12 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useAppContext } from "../context";
 
+
 const SearchBar = () => {
   const { isMobileSideBarOpen, setIsMobileSideBarOpen } = useAppContext();
   const { data: session } = useSession();
   const router = useRouter();
+
   const onClick = async () => {
     await signOut({ redirect: true, callbackUrl: "/" });
     localStorage.removeItem("activeItem");
@@ -32,13 +34,12 @@ const SearchBar = () => {
       <div className="w-full border border-b border-gray-200 bg-white">
         <div className="mx-4 my-2 flex flex-row items-center justify-between ">
           {/* input */}
-          <div className="mr-4 w-full">
+          <div className="mr-4 w-full cursor-pointer">
             <Input
               fullWidth={true}
               type="email"
               variant="bordered"
               radius="sm"
-              className=""
               placeholder="Search for people and companies accross the entire Soma network"
             />
           </div>
