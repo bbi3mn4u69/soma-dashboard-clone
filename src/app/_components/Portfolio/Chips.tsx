@@ -63,7 +63,7 @@ const TopChips = () => {
   } = useAppContext();
   return (
     <>
-      <div className="flex flex-col items-start sm:hidden">
+      <div className="flex flex-col items-start ">
         <div className="flex flex-row items-center gap-2">
           <Chip1 content={portforlioValuationSelected} />
           <Chip2 content={portforlioIndustrySelected} />

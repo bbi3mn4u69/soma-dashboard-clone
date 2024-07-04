@@ -21,7 +21,28 @@ const Company = () => {
     portforlioIndustrySelected,
     portforlioValuationSelected,
     portforlioRegionSelected,
+    setPortforlioRegionSelected
   } = useAppContext();
+  switch (portforlioRegionSelected) {
+    case ("SF"):
+      setPortforlioRegionSelected("US")
+      break;
+    case ("NYC"):
+      setPortforlioRegionSelected("US")
+      break;
+    case ("LA"):
+      setPortforlioRegionSelected("US")
+      break;
+    case ("Miami"):
+      setPortforlioRegionSelected("US")
+      break;
+    case ("Boston"):
+      setPortforlioRegionSelected("US")
+      break;
+    case ("Austin"):
+      setPortforlioRegionSelected("US")
+      break;
+  }
   const { data, isLoading } = api.dashboardPortfolio.portfolioFilter.useQuery({
     value: portforlioValuationSelected,
     industry: portforlioIndustrySelected,
@@ -33,8 +54,8 @@ const Company = () => {
 
   return (
     <>
-      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3 max-w-[300px] lg:max-w-none">
-        <Table aria-label="Example table with dynamic content" className="overflow-x-auto">
+      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3 max-w-[300px] sm:max-w-[400px] lg:max-w-none">
+        <Table  aria-label="Example table with dynamic content" className="overflow-x-auto">
           <TableHeader>
             <TableColumn>
               <div className="flex flex-row items-center gap-1">
@@ -49,13 +70,13 @@ const Company = () => {
               </div>
             </TableColumn>
             <TableColumn>
-              <div>Region</div>
+              Region
             </TableColumn>
             <TableColumn>Industry</TableColumn>
-            <TableColumn className="hidden sm:block ">Investment Date</TableColumn>
+            <TableColumn>Investment Date</TableColumn>
             <TableColumn>Valuation</TableColumn>
           </TableHeader>
-          <TableBody>
+          <TableBody emptyContent={"No rows to display."}>
             {isLoading
               ? [...Array<number>(10)].map((_, index) => (
                   <TableRow key={index}>
@@ -87,11 +108,11 @@ const Company = () => {
                     <TableCell>
                       <div className="flex flex-row items-center gap-2 cursor-pointer" onClick={() => onClick(company.id)}>
                         <Image
-                          src={company.logoUrl ?? ""}
+                          src={company.logoUrl ?? "https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"}
                           alt="Company Logo"
                           width={45}
                           height={45}
-                          className="rounded-md hidden"
+                          className="rounded-md hidden sm:block"
                         />
                         <div className="flex flex-col gap-0">
                           <div className="text-sm font-medium">
@@ -117,7 +138,7 @@ const Company = () => {
                         {company.sectors[0]?.name ?? ""}
                       </Chip>
                     </TableCell>
-                    <TableCell className="font-medium text-gray-400 hidden sm:block">
+                    <TableCell className="font-medium text-gray-400">
                       {getRandomDateAsString(2010, 2024, "MM/DD/YYYY")}
                     </TableCell>
                     <TableCell>

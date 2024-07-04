@@ -39,8 +39,8 @@ const Filter = () => {
   } = useAppContext();
 
   return (
-    <div className="flex h-full flex-grow flex-col flex-nowrap space-y-3 overflow-y-scroll text-nowrap px-7 pb-7 w-fit">
-      <div className="flex sm:flex-col flex-row justify-start gap-2">
+    <div className="flex h-full w-fit flex-grow flex-col flex-nowrap space-y-3 overflow-y-scroll text-nowrap px-7 pb-7">
+      <div className="flex flex-row justify-start gap-2 sm:flex-col">
         <div className="text-start">
           <RadioGroup
             defaultValue="All"
@@ -79,7 +79,7 @@ const Filter = () => {
             <Radio value="All" className="text-sm">
               All
             </Radio>
-            <Radio value="B2B/SaaS">B2B/SaaS</Radio>
+            <Radio value="B2B / SaaS">B2B/SaaS</Radio>
             <Radio value="AI">AI</Radio>
             <Radio value="FinTech">FinTech</Radio>
             <Radio value="Logistics">Logistics</Radio>
