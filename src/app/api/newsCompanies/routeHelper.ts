@@ -14,6 +14,7 @@ export async function getCompaniesName() {
       select: {
         name: true,
         id: true,
+        websiteUrl: true,
       },
     });
     return companiesName;

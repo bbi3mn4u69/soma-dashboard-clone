@@ -21,7 +21,7 @@ export const SinglePerson = ({
           alt="placeholder"
           width={200}
           height={200}
-          className="h-[170px] w-[170px] cursor-pointer rounded-2xl transition-all duration-300 hover:scale-110 sm:h-[200px] sm:w-[200px]"
+          className="h-[170px] w-[170px] cursor-pointer rounded-2xl transition-all duration-300 hover:scale-110 "
           onClick={() => {
             router.push(personRoute);
             localStorage.setItem("activeItem", "null");

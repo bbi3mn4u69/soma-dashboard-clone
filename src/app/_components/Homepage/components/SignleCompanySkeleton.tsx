@@ -16,7 +16,7 @@ export const SingleCompanySkeleton = () => {
               <Skeleton className="h-4 w-64 rounded  sm:w-96" />
             </div>
           </div>
-          <div className=" sm:fkex hidden flex-row justify-start space-x-11 text-nowrap text-sm font-light text-gray-400">
+          <div className=" sm:flex hidden flex-row justify-start space-x-11 text-nowrap text-sm font-light text-gray-400">
             <div>
               <Skeleton className="h-4 w-12 rounded" />
             </div>
