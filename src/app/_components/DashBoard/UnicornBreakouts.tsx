@@ -20,7 +20,9 @@ const UnicornBreakouts = () => {
       </CardHeader>
       <CardBody className="flex-grow overflow-y-auto">
         <div className="flex flex-col justify-center">
-          {isLoading && <UnicornSkeleton></UnicornSkeleton>}
+          {isLoading && [...Array<number>(6)].map((_, index) => (
+            <UnicornSkeleton key={index}></UnicornSkeleton>
+          ))}
 
           {data?.map((company) => (
             <Unicorns
