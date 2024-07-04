@@ -35,7 +35,7 @@ export const url = [
   "https://www.cnbc.com/id/19854910/device/rss/rss.html",
   "https://www.economist.com/science-and-technology/rss.xml",
   "http://feeds.feedburner.com/venturebeat/SZYF",
-  "http://feeds.bbci.co.uk/news/technology/rss.xml",
+  // "http://feeds.bbci.co.uk/news/technology/rss.xml",
   "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
   "http://feeds.feedburner.com/typepad/alleyinsider/silicon_alley_insider",
   "http://feeds.washingtonpost.com/rss/business/technology",
