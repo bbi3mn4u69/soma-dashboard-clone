@@ -71,6 +71,7 @@ const RecentInvest = () => {
         ) : (
           recentInvestedCompany?.map((company) => (
             <DynamicNews
+            key={company.id}
             logo={
               company.logoUrl ??
               "https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"

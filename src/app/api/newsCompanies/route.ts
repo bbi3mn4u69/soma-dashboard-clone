@@ -82,7 +82,7 @@ export async function GET() {
 async function fetchFullArticleContent(url: string): Promise<string> {
   try {
     const response = await axios.get(url);
-    return response.data; 
+    return response.data;   // eslint-disable-line
   } catch (error) {
     console.error(`Failed to fetch article content from ${url}`, error);
     return "";

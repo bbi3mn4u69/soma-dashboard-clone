@@ -17,11 +17,11 @@ const AboutText = () => {
           connections made from the company his father Vivek Ranadive founded
           called TIBCO. TIBCO Software ($4.3b exit) digitized Wall Street in the
           90s powering many large enterprises across myriad industries and
-          geographies. TIBCO's pioneering products include middleware,
+          geographies. TIBCO&apos;s pioneering products include middleware,
           integration, big data, analytics, event processing and cloud services.
           Vivek has also seeded and mentored many tech luminaries from google to
           yahoo, salesforce, eBay, and Steve Jobs personally among many others.
-          In 2013, Vivek Ranadive purchased the NBA's Sacramento Kings, becoming
+          In 2013, Vivek Ranadive purchased the NBA&apos;s Sacramento Kings, becoming
           the first Indian-born majority owner in the league.
         </div>
       </div>
