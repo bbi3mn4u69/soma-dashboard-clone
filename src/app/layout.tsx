@@ -1,11 +1,13 @@
 'use client'
 import "~/styles/globals.css";
 
+
 import { GeistSans } from "geist/font/sans";
 import AppContextProvider from "./_components/context";
 import { TRPCReactProvider } from "~/trpc/react";
 import { SessionProvider } from "next-auth/react";
 import { Metadata } from "./_components/shared/Metadata";
+import Transition from "./template";
 
 // export const metadata = {
 //   title: "Create T3 App",
@@ -21,10 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <Metadata title="Home" description="Unicorn" href="/favicon.ico" />
-      <body>
+      <body >
         <SessionProvider>
           <AppContextProvider>
-            <TRPCReactProvider>{children}</TRPCReactProvider>
+            <TRPCReactProvider>
+              <Transition>
+                {children}
+              </Transition>
+              </TRPCReactProvider>
           </AppContextProvider>
         </SessionProvider>
       </body>
