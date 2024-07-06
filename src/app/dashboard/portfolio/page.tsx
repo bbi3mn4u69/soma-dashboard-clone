@@ -19,22 +19,22 @@ const PortfolioPage = () => {
   return (
     <SessionProvider>
       <MobileFilterModal />
-      <div className="h-screen w-screen bg-slate-50 overflow-hidden overflow-x-hidden">
+      <div className="h-screen w-screen overflow-hidden overflow-x-hidden bg-slate-50">
         <div className="flex h-full w-full flex-row justify-start">
           <div>
             <SidePanel />
           </div>
           <div className="flex h-full w-full flex-col ">
             <SearchBar />
-            <div className="flex flex-col space-y-4 sm:p-7 p-3">
+            <div className="flex flex-col space-y-4 p-3 sm:p-7">
               <HeroTabs />
               <TopChips />
             </div>
-            <div className="flex h-dvh w-full flex-grow flex-row sm:space-x-9 space-x-3 overflow-y-scroll pt-1  ">
-              <div className="sticky top-0 hidden sm:block w-fit">
+            <div className="flex h-dvh w-full flex-grow flex-row space-x-3 overflow-y-scroll pt-1 sm:space-x-9  ">
+              <div className="sticky top-0 hidden w-fit sm:block">
                 <Filter />
               </div>
-              
+
               <Company />
             </div>
           </div>

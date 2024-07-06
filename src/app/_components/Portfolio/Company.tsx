@@ -21,26 +21,26 @@ const Company = () => {
     portforlioIndustrySelected,
     portforlioValuationSelected,
     portforlioRegionSelected,
-    setPortforlioRegionSelected
+    setPortforlioRegionSelected,
   } = useAppContext();
   switch (portforlioRegionSelected) {
-    case ("SF"):
-      setPortforlioRegionSelected("US")
+    case "SF":
+      setPortforlioRegionSelected("US");
       break;
-    case ("NYC"):
-      setPortforlioRegionSelected("US")
+    case "NYC":
+      setPortforlioRegionSelected("US");
       break;
-    case ("LA"):
-      setPortforlioRegionSelected("US")
+    case "LA":
+      setPortforlioRegionSelected("US");
       break;
-    case ("Miami"):
-      setPortforlioRegionSelected("US")
+    case "Miami":
+      setPortforlioRegionSelected("US");
       break;
-    case ("Boston"):
-      setPortforlioRegionSelected("US")
+    case "Boston":
+      setPortforlioRegionSelected("US");
       break;
-    case ("Austin"):
-      setPortforlioRegionSelected("US")
+    case "Austin":
+      setPortforlioRegionSelected("US");
       break;
   }
   const { data, isLoading } = api.dashboardPortfolio.portfolioFilter.useQuery({
@@ -50,12 +50,15 @@ const Company = () => {
   });
   const onClick = (companyId: string) => {
     router.push(`/dashboard/company/${companyId}`);
-  }
+  };
 
   return (
     <>
-      <div className="h-full w-full sm:pb-7 sm:pr-7 pr-3 pb-3 max-w-[300px] sm:max-w-[400px] lg:max-w-none">
-        <Table  aria-label="Example table with dynamic content" className="overflow-x-auto">
+      <div className="h-full w-full max-w-[300px] pb-3 pr-3 sm:max-w-[400px] sm:pb-7 sm:pr-7 lg:max-w-none">
+        <Table
+          aria-label="Example table with dynamic content"
+          className="overflow-x-auto"
+        >
           <TableHeader>
             <TableColumn>
               <div className="flex flex-row items-center gap-1">
@@ -69,9 +72,7 @@ const Company = () => {
                 )}
               </div>
             </TableColumn>
-            <TableColumn>
-              Region
-            </TableColumn>
+            <TableColumn>Region</TableColumn>
             <TableColumn>Industry</TableColumn>
             <TableColumn>Investment Date</TableColumn>
             <TableColumn>Valuation</TableColumn>
@@ -106,19 +107,25 @@ const Company = () => {
               : (data ?? []).map((company) => (
                   <TableRow key={company.id}>
                     <TableCell>
-                      <div className="flex flex-row items-center gap-2 cursor-pointer" onClick={() => onClick(company.id)}>
+                      <div
+                        className="flex cursor-pointer flex-row items-center gap-2"
+                        onClick={() => onClick(company.id)}
+                      >
                         <Image
-                          src={company.logoUrl ?? "https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"}
+                          src={
+                            company.logoUrl ??
+                            "https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
+                          }
                           alt="Company Logo"
                           width={45}
                           height={45}
-                          className="rounded-md hidden sm:block"
+                          className="hidden rounded-md sm:block"
                         />
                         <div className="flex flex-col gap-0">
                           <div className="text-sm font-medium">
                             {company.name}
                           </div>
-                          <div className="text-xs font-medium text-gray-400 hidden sm:block">
+                          <div className="hidden text-xs font-medium text-gray-400 sm:block">
                             {company.oneLiner}
                           </div>
                         </div>
