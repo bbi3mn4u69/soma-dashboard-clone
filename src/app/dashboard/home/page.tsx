@@ -16,7 +16,7 @@ const DashboardPage = () => {
     return <></>;
   }
   return (
-    <div className="h-screen w-screen overflow-hidden bg-slate-50 sm:overflow-visible overflow-x-hidden">
+    <div className="h-screen w-screen overflow-hidden overflow-x-hidden bg-slate-50 sm:overflow-visible">
       <div className="flex h-full w-full flex-row justify-center">
         <div>
           <SidePanel />
