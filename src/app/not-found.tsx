@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { GrayLogo } from "./image/gray-logo";
 import { Arrow } from "./_components/Icon";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const NotFound = () => {
             Sorry, we couldn’t find the page you’re looking for.
           </div>
           <div
-            className="flex cursor-pointer flex-row items-center justify-center gap-2 hover:scale-110 transition-all duration-300"
+            className="flex cursor-pointer flex-row items-center justify-center gap-2 transition-all duration-300 hover:scale-110"
             onClick={() => {
               router.push("/");
             }}

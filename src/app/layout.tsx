@@ -1,6 +1,5 @@
-'use client'
+"use client";
 import "~/styles/globals.css";
-
 
 import { GeistSans } from "geist/font/sans";
 import AppContextProvider from "./_components/context";
@@ -23,14 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <Metadata title="Home" description="Unicorn" href="/favicon.ico" />
-      <body >
+      <body>
         <SessionProvider>
           <AppContextProvider>
             <TRPCReactProvider>
-              <Transition>
-                {children}
-              </Transition>
-              </TRPCReactProvider>
+              <Transition>{children}</Transition>
+            </TRPCReactProvider>
           </AppContextProvider>
         </SessionProvider>
       </body>
