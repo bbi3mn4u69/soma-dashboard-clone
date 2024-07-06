@@ -22,33 +22,31 @@ const SingleCompany = ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      
-        <div className="h-screen bg-slate-50">
-          <div className="flex h-full flex-row justify-start">
-            <div>
-              <SidePanel></SidePanel>
-            </div>
-            <div className="flex h-full w-full flex-col">
-              <SearchBar></SearchBar>
-              <div className="flex h-full flex-grow flex-col overflow-y-scroll">
-                <FetchCompanyLogo companyId={slug}></FetchCompanyLogo>
-                <SignleCompanyTabs></SignleCompanyTabs>
-                <div>
-                  {tabSelected === "$.0" ? (
-                    <FetchCompanyInformation
-                      companyId={slug}
-                    ></FetchCompanyInformation>
-                  ) : tabSelected === "$.1" ? (
-                    <CompanyNews companyId={slug}></CompanyNews>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+      <div className="h-screen bg-slate-50">
+        <div className="flex h-full flex-row justify-start">
+          <div>
+            <SidePanel></SidePanel>
+          </div>
+          <div className="flex h-full w-full flex-col">
+            <SearchBar></SearchBar>
+            <div className="flex h-full flex-grow flex-col overflow-y-scroll">
+              <FetchCompanyLogo companyId={slug}></FetchCompanyLogo>
+              <SignleCompanyTabs></SignleCompanyTabs>
+              <div>
+                {tabSelected === "$.0" ? (
+                  <FetchCompanyInformation
+                    companyId={slug}
+                  ></FetchCompanyInformation>
+                ) : tabSelected === "$.1" ? (
+                  <CompanyNews companyId={slug}></CompanyNews>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
         </div>
-      
+      </div>
     </>
   );
 };
