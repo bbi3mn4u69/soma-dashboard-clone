@@ -17,7 +17,7 @@ export default function RoleControl({
   userId: string;
 }) {
   const { setUserRoleControl } = useAppContext();
-  if (userRole) {
+  
     const [selectedKeys, setSelectedKeys] = useState(new Set([userRole]));
 
     const selectedValue = useMemo(
@@ -56,7 +56,7 @@ export default function RoleControl({
           variant="flat"
           disallowEmptySelection
           selectionMode="single"
-          selectedKeys={selectedKeys}
+          selectedKeys={selectedKeys as Set<string>}
           onSelectionChange={(e) => setSelectedKeys(e as Set<string>)}
         >
           <DropdownItem key="User">User</DropdownItem>
@@ -64,7 +64,5 @@ export default function RoleControl({
         </DropdownMenu>
       </Dropdown>
     );
-  } else {
-    return <CircularProgress size="sm" aria-label="Loading..." />;
-  }
+
 }
