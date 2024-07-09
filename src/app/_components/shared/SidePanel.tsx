@@ -79,7 +79,7 @@ const SidePanel = () => {
           <NavButton
             title="Stock"
             icon={<Stock active={activeButton === "Stock"} />}
-            onClick={() => setActiveButton("Stock")}
+            onClick={() => {setActiveButton("Stock"), router.push("/dashboard/stock")}}
             isActive={activeButton === "Stock"}
           />
         </div>
