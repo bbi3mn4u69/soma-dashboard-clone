@@ -6,14 +6,21 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: "https",
-          hostname: "**",
-        },
-      ],
-      }
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+  experimental: {
+    serverComponentsExternalPackages: [
+      'puppeteer-extra', 
+      'puppeteer-extra-plugin-stealth',
+      'puppeteer-extra-plugin-recaptcha',
+    ],
+  },
 };
 
 export default config;
