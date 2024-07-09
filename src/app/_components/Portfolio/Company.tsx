@@ -56,7 +56,7 @@ const Company = () => {
     <>
       <div className="h-full w-full max-w-[300px] pb-3 pr-3 sm:max-w-[400px] sm:pb-7 sm:pr-7 lg:max-w-none">
         <Table
-          aria-label="Example table with dynamic content"
+          aria-label=" table with dynamic content"
           className="overflow-x-auto"
         >
           <TableHeader>
