@@ -16,97 +16,68 @@ import {
 import { EditIcon } from "~/app/_components/Icon";
 import { DeleteIcon } from "~/app/_components/Icon";
 import { EyeIcon } from "~/app/_components/Icon";
-import { columns, users } from "./HelperData";
+import { api } from "~/trpc/react";
+import { useAppContext } from "~/app/_components/context";
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
 
-type User = (typeof users)[0];
+
 
 const UserTable = () => {
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                <EyeIcon />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+  const { data: allUsers } = api.admin.getAllUsers.useQuery();
+  const { setIsUserDetailView, setUserId, setIsUserDetailEdit } = useAppContext();
+  
 
   return (
-    <div className="px-7 pb-7">
-      <Table aria-label="Example table with custom cells">
-        <TableHeader columns={columns}>
-          {(column) => (
-            <TableColumn
-              key={column.uid}
-              align={column.uid === "actions" ? "center" : "start"}
-            >
-              {column.name}
-            </TableColumn>
-          )}
+    <div className="w-full px-7 pb-7 h-full max-w-[300px] pr-3 sm:max-w-[400px] sm:pb-7 sm:pr-7 lg:max-w-none">
+      <Table aria-label="Example table with custom cells" className="w-full">
+        <TableHeader>
+          <TableColumn>NAME</TableColumn>
+          <TableColumn>ROLE</TableColumn>
+          <TableColumn>ACTIONS</TableColumn>
         </TableHeader>
-        <TableBody items={users}>
-          {(item) => (
-            <TableRow key={item.id}>
-              {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
-              )}
+        <TableBody>
+          {(allUsers ?? []).map((user) => (
+            <TableRow key={user.id}>
+              <TableCell>
+                <User
+                  avatarProps={{ size: "lg", radius: "lg", src: user.image ?? "https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg" }}
+                  description={user.email}
+                  name={user.name}
+                >
+                  {user.email}
+                </User>
+              </TableCell>
+              <TableCell className="uppercase text-gray-500">{user.role}</TableCell>
+
+              <TableCell>
+                <div className="relative flex items-center gap-5">
+                  <Tooltip content="Details">
+                    <span className="cursor-pointer text-lg text-default-400 active:opacity-50" onClick={() => {
+                      setIsUserDetailView(true);
+                      setUserId(user.id);
+                    }}>
+                      <EyeIcon />
+                    </span>
+                  </Tooltip>
+
+                  <Tooltip content="Edit user">
+                    <span className="cursor-pointer text-lg text-default-400 active:opacity-50" onClick={() => {
+                      setIsUserDetailEdit(true);
+                      setUserId(user.id);
+                    }}>
+                      <EditIcon />
+                    </span>
+                  </Tooltip>
+
+                  <Tooltip color="danger" content="Delete user">
+                    <span className="cursor-pointer text-lg text-danger active:opacity-50">
+                      <DeleteIcon />
+                    </span>
+                  </Tooltip>
+                </div>
+              </TableCell>
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </Table>
     </div>
