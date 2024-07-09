@@ -186,7 +186,7 @@ export function Chart() {
               axisLine={false}
               tickMargin={8}
               minTickGap={32}
-              tickFormatter={(value) => {
+              tickFormatter={(value: number | string | Date) => {
                 const date = new Date(value)
                 return date.toLocaleDateString("en-US", {
                   month: "short",
@@ -199,7 +199,7 @@ export function Chart() {
                 <ChartTooltipContent
                   className="w-[150px]"
                   nameKey="views"
-                  labelFormatter={(value) => {
+                  labelFormatter={(value: number | string | Date) => {
                     return new Date(value).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",

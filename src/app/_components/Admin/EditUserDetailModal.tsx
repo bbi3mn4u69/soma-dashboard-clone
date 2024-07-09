@@ -58,7 +58,7 @@ const EditUserDetailModal = () => {
                                 type="text"
                                 variant="bordered"
                                 label="Name"
-                                defaultValue={user.name as string}
+                                defaultValue={user.name!}
                                 onChange={(e) =>
                                   setEditUserName(e.target.value)
                                 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -16,15 +16,18 @@ export default function RoleControl({
   userRole: string | null;
   userId: string;
 }) {
+  const { setUserRoleControl } = useAppContext();
   if (userRole) {
-    const [selectedKeys, setSelectedKeys] = React.useState(new Set([userRole]));
+    const [selectedKeys, setSelectedKeys] = useState(new Set([userRole]));
 
-    const selectedValue = React.useMemo(
+    const selectedValue = useMemo(
       () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
       [selectedKeys],
     );
-    const { setUserRoleControl } = useAppContext();
+    
+    
     // const manageUserRole = api.admin.editUserDetails.useMutation();
+    // eslint-disable-line
     useEffect(() => {
 
       switch (selectedValue) {
