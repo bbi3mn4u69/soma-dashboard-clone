@@ -158,8 +158,8 @@ export function Chart() {
                 <span className="text-xs text-muted-foreground">
                   {chartConfig[chart].label}
                 </span>
-                <span className="text-lg font-bold leading-none sm:text-3xl">
-                 $ {total[key as keyof typeof total].toLocaleString()}
+                <span className="text-lg font-bold leading-none sm:text-3xl text-nowrap">
+                 ${total[key as keyof typeof total].toLocaleString()}
                 </span>
               </button>
             )
