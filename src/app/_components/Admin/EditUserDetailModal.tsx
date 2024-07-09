@@ -18,8 +18,9 @@ import { CalendarDate, parseDate } from "@internationalized/date";
 import { CalendarIcon } from "~/app/_components/Icon";
 
 const EditUserDetailModal = () => {
-  const { isUserDetailEdit, setIsUserDetailEdit, userId } = useAppContext();
+  const { isUserDetailEdit, setIsUserDetailEdit, userId,  userRoleControl} = useAppContext();
   const { data: user } = api.admin.getSpecificUser.useQuery({ id: userId! });
+  const userMutation = api.admin.editUserDetails.useMutation();
   const [editUserName, setEditUserName] = useState<string | undefined | null>(
     user?.name,
   );
@@ -27,6 +28,24 @@ const EditUserDetailModal = () => {
     user?.emailVerified ? parseDate(user.emailVerified.toISOString()) : undefined
   )
 
+  const utils = api.useContext();
+
+const EditAction = async () => {
+  if (editUserName || datePicker || userRoleControl) {
+    await userMutation.mutateAsync({
+      id: userId!,
+      ...(editUserName && { name: editUserName }),
+      ...(datePicker && { createdAt: datePicker.toString() }),
+      ...(userRoleControl && { role: userRoleControl }),
+    });
+
+    
+    await utils.admin.getAllUsers.invalidate();
+    await utils.admin.getSpecificUser.invalidate({ id: userId! });
+
+    setIsUserDetailEdit(false);
+  }
+};
   
 
 
@@ -53,7 +72,7 @@ const EditUserDetailModal = () => {
                             className="h-20 w-20 text-large"
                           />
                           <div className="flex flex-col">
-                            <div className="flex flex-row items-center justify-start gap-2 text-base uppercase text-gray-400">
+                            <div className="flex flex-row items-center justify-start gap-2 text-base uppercase ">
                               <Input
                                 type="text"
                                 variant="bordered"
@@ -83,7 +102,7 @@ const EditUserDetailModal = () => {
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <div className="py-3 text-lg font-medium">Joined</div>
+                          <div className="py-3 text-lg font-medium">Joined Since</div>
                           <div className="px-4 text-base text-gray-400">
                             <DateInput
                               value={datePicker}
@@ -107,7 +126,7 @@ const EditUserDetailModal = () => {
                       >
                         Close
                       </Button>
-                      <Button color="primary" onPress={isUserDetailEdit}>
+                      <Button color="primary" onPress={EditAction}>
                         Confirm
                       </Button>
                     </ModalFooter>

@@ -17,52 +17,42 @@ export default function RoleControl({
   userId: string;
 }) {
   const { setUserRoleControl } = useAppContext();
-  
-    const [selectedKeys, setSelectedKeys] = useState(new Set([userRole]));
 
-    const selectedValue = useMemo(
-      () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-      [selectedKeys],
-    );
-    
-    
-    // const manageUserRole = api.admin.editUserDetails.useMutation();
-    // eslint-disable-line
-    useEffect(() => {
+  const [selectedKeys, setSelectedKeys] = useState(new Set([userRole]));
 
-      switch (selectedValue) {
-        case "User":
-          setUserRoleControl("User");
-          // manageUserRole.mutateAsync({ id: userId, role: "user" });
+  const selectedValue = useMemo(
+    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+    [selectedKeys],
+  );
 
-          break;
-        case "Admin":
-          setUserRoleControl("Admin");
-          // manageUserRole.mutateAsync({ id: userId, role: "admin" });
-
-          break;
-      }
-
-    }, [selectedValue]);
-    return (
-      <Dropdown>
-        <DropdownTrigger>
-          <Button variant="bordered" className="capitalize">
-            {selectedValue}
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          aria-label="Select role for user"
-          variant="flat"
-          disallowEmptySelection
-          selectionMode="single"
-          selectedKeys={selectedKeys as Set<string>}
-          onSelectionChange={(e) => setSelectedKeys(e as Set<string>)}
-        >
-          <DropdownItem key="User">User</DropdownItem>
-          <DropdownItem key="Admin">Admin</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
-
+  useEffect(() => {
+    switch (selectedValue) {
+      case "User":
+        setUserRoleControl("User");
+        break;
+      case "Admin":
+        setUserRoleControl("Admin");
+        break;
+    }
+  }, [selectedValue]);
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button variant="bordered" className="capitalize">
+          {selectedValue}
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu
+        aria-label="Select role for user"
+        variant="flat"
+        disallowEmptySelection
+        selectionMode="single"
+        selectedKeys={selectedKeys as Set<string>}
+        onSelectionChange={(e) => setSelectedKeys(e as Set<string>)}
+      >
+        <DropdownItem key="User">User</DropdownItem>
+        <DropdownItem key="Admin">Admin</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
 }

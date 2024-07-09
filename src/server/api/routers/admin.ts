@@ -63,18 +63,17 @@ export const adminRouter = createTRPCRouter({
       z.object({
         id: z.string(),
         name: z.string().optional(),
-        email: z.string().optional(),
         role: z.string().optional(),
+        createdAt: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.db.user.update({
         where: { id: input.id },
         data: {
-          name: input.name,
           ...(input.name && { name: input.name }),
-          ...(input.email && { email: input.email }),
           ...(input.role && { role: input.role as UserRole }),
+          ...(input.createdAt && { createdAt: input.createdAt }),
         },
       });
       return user;
