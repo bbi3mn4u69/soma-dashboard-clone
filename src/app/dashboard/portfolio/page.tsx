@@ -34,7 +34,6 @@ const PortfolioPage = () => {
               <div className="sticky top-0 hidden w-fit sm:block">
                 <Filter />
               </div>
-
               <Company />
             </div>
           </div>
