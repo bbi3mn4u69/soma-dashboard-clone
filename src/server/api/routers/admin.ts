@@ -6,6 +6,7 @@ import {
 
 import { z } from "zod";
 import { UserRole } from "@prisma/client";
+import { ChartTooltip } from "~/components/ui/chart";
 
 export const adminRouter = createTRPCRouter({
   getAllUsers: protectedProcedure.query(async ({ ctx }) => {
@@ -77,5 +78,21 @@ export const adminRouter = createTRPCRouter({
         },
       });
       return user;
+    }),
+    deleteSpecificUser: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const user = await ctx.db.user.delete({
+        where: { id: input.id },
+      });
+        return user;
+      } catch (e) {
+        console.log(e);
+      }
     }),
 });

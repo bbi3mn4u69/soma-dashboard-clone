@@ -28,10 +28,10 @@ export default function RoleControl({
   useEffect(() => {
     switch (selectedValue) {
       case "User":
-        setUserRoleControl("User");
+        setUserRoleControl("user");
         break;
       case "Admin":
-        setUserRoleControl("Admin");
+        setUserRoleControl("admin");
         break;
     }
   }, [selectedValue]);
