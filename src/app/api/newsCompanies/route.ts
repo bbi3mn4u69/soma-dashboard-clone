@@ -138,7 +138,7 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({ companies: companyResults });
+    return NextResponse.json("all good");
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
