@@ -1,102 +1,145 @@
-// import Parser from "rss-parser";
-// import { NextRequest, NextResponse } from "next/server";
-// import { db } from "~/server/db";
-// import puppeteer from 'puppeteer';
-// import * as cheerio from "cheerio";
-// import {
-//   url,
-//   getCompaniesName,
-//   stripHtml,
-//   escapeRegExp,
-//   formatPubDate,
-// } from "./routeHelper";
-// import axios from "axios";
+import { ScrapflyClient, ScrapeConfig, ScrapeResult } from "scrapfly-sdk";
+import { NextResponse } from "next/server";
+import * as cheerio from "cheerio";
+import Parser from "rss-parser";
+import { extractFeedItems, getCompaniesName, url } from "./routeHelper";
+import { db } from "~/server/db";
+const scrapfly = new ScrapflyClient({
+  key: process.env.NEXT_PUBLIC_SCRAPEFLY_API_KEYS!,
+});
 
-// export async function GET() {
-//   const parser = new Parser();
-//   const feedsPromises = url.map((link) =>
-//     parser.parseURL(link).then((feed) => ({ link, feed })),
-//   );
-//   const feeds = await Promise.all(feedsPromises);
+const parser = new Parser();
 
-//   // Retrieve company names and IDs from the database
-//   const companies = await getCompaniesName();
+const extractLinks = (html: string) => {
+  const $ = cheerio.load(html);
+  const links: string[] = [];
+  $("body a").each((_, element) => {
+    const href = $(element).attr("href");
+    if (href && href.startsWith("https:")) links.push(href);
+  });
+  return links;
+};
 
-//   if (!companies) {
-//     return NextResponse.json({ message: "No companies found" });
-//   }
+const scrapeUrl = async (url: string) => {
+  console.log(`Processing URL: ${url}`);
+  try {
+    const result: ScrapeResult = await scrapfly.scrape(
+      new ScrapeConfig({
+        url: url,
+        method: "GET",
+        headers: {
+          "X-Csrf-Token": "1234",
+        },
+        debug: true,
+        cache: true,
+        cache_ttl: 3600,
+        asp: true,
+        country: "US,CA,FR",
+        render_js: true,
+        wait_for_selector: "body",
+      }),
+    );
 
-//   const companyNames = companies.map((c) => ({
-//     name: c.name,
-//     id: c.id,
-//     url: c.websiteUrl,
-//   }));
+    const html = result.result.content;
+    return extractLinks(html);
+  } catch (error: any) {
+    console.error(`Error scraping ${url}: ${error.message}`);
+    console.error(`Status code: ${error.response?.status || "Unknown"}`);
+    return [];
+  }
+};
 
-//   // Launch a single browser instance
-//   const browser = await puppeteer.launch({ headless: true, slowMo: 250 });
+const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
+  try {
+    const companyUrlObj = new URL(companyUrl);
+    const articleUrlObj = new URL(articleUrl);
 
-//   // Filter feeds and map articles to companies using regex for whole word matching
-//   const articlesToSave = await Promise.all(
-//     feeds.flatMap(async ({ link, feed }) => {
-//       const providerName = feed.title;
-//       const logoUrl: string = feed.image?.url ?? feed.icon ?? feed.logo; // eslint-disable-line
-//       return await Promise.all(
-//         feed.items.flatMap(async (item) => {
-//           const articleContent = await fetchArticleInsideLink(browser, item.link ?? "");
-//           return companyNames
-//             .filter((company) => {
-//               const urlRegex = new RegExp(`\\b${escapeRegExp(company.url)}\\b`);
-//               return articleContent.some(content => urlRegex.test(content ?? ""));
-//             })
-//             .map((company) => ({
-//               companyId: company.id,
-//               companyName: company.name,
-//               articleContent: stripHtml(item.content ?? ""),
-//               articleTitle: item.title,
-//               articleUrl: item.link,
-//               publishedAt: formatPubDate(item.pubDate ?? ""),
-//               source: link,
-//               logoUrl: logoUrl,
-//               providerName: providerName,
-//             }));
-//         }),
-//       );
-//     }),
-//   );
+    // Remove 'www.' from hostnames
+    const companyDomain = companyUrlObj.hostname.replace(/^www\./, "");
+    const articleDomain = articleUrlObj.hostname.replace(/^www\./, "");
 
-//   // Close the browser instance
-//   await browser.close();
+    // Check if domains match
+    if (companyDomain !== articleDomain) {
+      return false;
+    }
 
-//   const filteredArticlesToSave = articlesToSave.flat().filter(article => Object.keys(article).length > 0);
+    // Check if paths and search params match
+    return (
+      companyUrlObj.pathname + companyUrlObj.search ===
+      articleUrlObj.pathname + articleUrlObj.search
+    );
+  } catch (error) {
+    console.error(`Error comparing URLs: ${error}`);
+    return false;
+  }
+};
 
-//   return NextResponse.json(filteredArticlesToSave);
-// }
+export async function GET() {
+  try {
+    const feedItems = await extractFeedItems(url, parser);
+    const companyResults: {
+      [key: string]: {
+        companyName: string;
+        title: string;
+        link: string;
+        pubDate: string;
+      }[];
+    } = {};
+    
 
-// async function fetchArticleInsideLink(
-//   browser: any,
-//   url: string,
-// ): Promise<string[]> {
-//   try {
-//     const page = await browser.newPage();
+    for (const item of feedItems) {
+      if (item.link && item.title) {
+        try {
+          const links = await scrapeUrl(item.link);
+          const companies = await getCompaniesName();
+          for (const company of companies!) {
+            if (company?.websiteUrl) {
+              const matchingLinks = links.filter((link) =>
+                urlMatches(company.websiteUrl, link),
+              );
+              if (matchingLinks.length > 0) {
+                if (!companyResults[company.id || ""]) {
+                  companyResults[company.id ?? ""] = [];
+                }
 
-//     // Set user agent
-//     await page.setUserAgent(
-//       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-//     );
+                companyResults[company.id ?? ""]?.push({
+                  companyName: company.name,
+                  title: item.title,
+                  link: item.link,
+                  pubDate: item.pubDate,
+                });
+                console.log("pushing" + company.name +"in the database, found match!")
+                await db.companyNews.upsert({
+                    where: {
+                        url: item.link
+                    }, 
+                    update: {
+                        companyId: company.id,
+                        companyRelated: company.name,
+                        title: item.title,
+                        publishedAt: item.pubDate,
+                        url: item.link
+                    },
+                    create: {
+                        companyId: company.id,
+                        companyRelated: company.name,
+                        title: item.title,
+                        publishedAt: item.pubDate,
+                        url: item.link
+                    }
+                })
+              }
+            }
+          }
+        } catch (error) {
+          console.error(`Failed to process article: ${item.title}`);
+        }
+      }
+    }
 
-//     await page.goto(url, { waitUntil: 'domcontentloaded' });
-
-//     const links = await page.evaluate(() => {
-//       const anchorElements = Array.from(document.querySelectorAll('body a'));
-//       return anchorElements
-//         .map(a => (a as HTMLAnchorElement).href)
-//         .filter(href => href.startsWith('https://'));
-//     });
-
-//     await page.close();
-//     return links;
-//   } catch (error) {
-//     console.log(`Error for URL ${url}: ${error}`);
-//   }
-//   return [];
-// }
+    return NextResponse.json({ companies: companyResults });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+  }
+}

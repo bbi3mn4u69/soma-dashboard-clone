@@ -4,39 +4,42 @@ import { NextResponse } from 'next/server';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth'
 
-// puppeteer.use(StealthPlugin())
+puppeteer.use(StealthPlugin())
 
-// const url: string = 'https://techcrunch.com/2024/07/05/epic-games-calls-out-apple-for-rejecting-its-games-store-in-the-eu/';
-
-
-// export async function GET(req: Request, res: Response) {
-//   try {
-//     const browser = await puppeteer.launch({ headless: true, defaultViewport: null  });
-//     const page = await browser.newPage();
-//     // Set user agent
-//     await page.setUserAgent(
-//       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-//     );
-
-//     await page.goto(url, { waitUntil: 'domcontentloaded' });
-
-//     const links = await page.evaluate(() => {
-//       const anchorElements = Array.from(document.querySelectorAll('body a'));
-//       return anchorElements.some(a => (a as HTMLAnchorElement).href.startsWith('https://www.rippling.com'));
-//     });
-
-//     await browser.close();
-//     return NextResponse.json({ links });
-//   } catch (error) {
-//     console.log(`Error for URL ${url}: ${error}`);
-//   }
-//   return NextResponse.json({ error: 'Failed to fetch links' });
-// }
+const url: string = 'https://techcrunch.com/2024/07/05/epic-games-calls-out-apple-for-rejecting-its-games-store-in-the-eu/';
 
 
+export async function GET(req: Request, res: Response) {
 
+const companyUrl = 'https://rippling.com';
+const articleUrl = 'https://www.rippling.com';
 
+const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
+  try {
+    const companyUrlObj = new URL(companyUrl);
+    const articleUrlObj = new URL(articleUrl);
 
-export async function GET () {
-  return NextResponse.json({ error: 'Failed to fetch links' });
+    // Remove 'www.' from hostnames
+    const companyDomain = companyUrlObj.hostname.replace(/^www\./, "");
+    const articleDomain = articleUrlObj.hostname.replace(/^www\./, "");
+
+    // Check if domains match
+    if (companyDomain !== articleDomain) {
+      return false;
+    }
+
+    // Check if paths and search params match
+    return (
+      companyUrlObj.pathname + companyUrlObj.search ===
+      articleUrlObj.pathname + articleUrlObj.search
+    );
+  } catch (error) {
+    console.error(`Error comparing URLs: ${error}`);
+    return false;
+  }
+};
+
+  return NextResponse.json(urlMatches(companyUrl, articleUrl));
 }
+
+

@@ -37,7 +37,7 @@ export const url = [
   "https://www.cnbc.com/id/19854910/device/rss/rss.html",
   "https://www.economist.com/science-and-technology/rss.xml",
   "http://feeds.feedburner.com/venturebeat/SZYF",
-  // "http://feeds.bbci.co.uk/news/technology/rss.xml",
+  
   "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
   "http://feeds.feedburner.com/typepad/alleyinsider/silicon_alley_insider",
   "http://feeds.washingtonpost.com/rss/business/technology",
@@ -55,7 +55,38 @@ export const url = [
 ];
 
 
+// "http://feeds.bbci.co.uk/news/technology/rss.xml",
 
 
 
 
+import Parser from 'rss-parser';
+
+interface FeedItem {
+  title: string;
+  link: string;
+  pubDate: string;
+}
+
+export async function extractFeedItems(urls: string[], parser: Parser): Promise<FeedItem[]> {
+  const feedItems: FeedItem[] = [];
+
+  for (const url of urls) {
+    try {
+      const feed = await parser.parseURL(url);
+      feed.items.forEach(item => {
+        if (item.title && item.link) {
+          feedItems.push({
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate ?? item.isoDate ?? new Date().toISOString()
+          });
+        }
+      });
+    } catch (error) {
+      console.error(`Error parsing RSS feed ${url}:`, error);
+    }
+  }
+
+  return feedItems;
+}

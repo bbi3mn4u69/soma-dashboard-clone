@@ -44,6 +44,7 @@
     "react-dom": "^18.3.0",
     "recharts": "^2.12.7",
     "rss-parser": "^3.13.0",
+    "scrapfly-sdk": "^0.5.1",
     "server-only": "^0.0.1",
     "sharp": "^0.33.4",
     "superjson": "^2.2.1",
