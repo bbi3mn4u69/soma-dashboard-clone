@@ -15,7 +15,7 @@ const extractLinks = (html: string) => {
   const links: string[] = [];
   $("body a").each((_, element) => {
     const href = $(element).attr("href");
-    if (href && href.startsWith("https:")) links.push(href);
+    if (href && href.startsWith("https:")) links.push(href); //eslint-disable-line
   });
   return links;
 };
@@ -42,9 +42,9 @@ const scrapeUrl = async (url: string) => {
 
     const html = result.result.content;
     return extractLinks(html);
-  } catch (error: any) {
-    console.error(`Error scraping ${url}: ${error.message}`);
-    console.error(`Status code: ${error.response?.status || "Unknown"}`);
+  } catch (error: any) {  //eslint-disable-line
+    console.error(`Error scraping ${url}: ${error.message}`); //eslint-disable-line
+    console.error(`Status code: ${error.response?.status || "Unknown"}`); //eslint-disable-line
     return [];
   }
 };
@@ -69,7 +69,7 @@ const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
       articleUrlObj.pathname + articleUrlObj.search
     );
   } catch (error) {
-    console.error(`Error comparing URLs: ${error}`);
+    console.error(`Error comparing URLs: ${error}`); //eslint-disable-line
     return false;
   }
 };
@@ -77,14 +77,15 @@ const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
 export async function GET() {
   try {
     const feedItems = await extractFeedItems(url, parser);
-    const companyResults: {
-      [key: string]: {
-        companyName: string;
-        title: string;
-        link: string;
-        pubDate: string;
-      }[];
-    } = {};
+
+    type CompanyNewsItem = {
+      companyName: string;
+      title: string;
+      link: string;
+      pubDate: string;
+    };
+
+    const companyResults: Record<string, CompanyNewsItem[]> = {};
     
 
     for (const item of feedItems) {

@@ -91,7 +91,9 @@ const UserTable = () => {
                     <span
                       className="cursor-pointer text-lg text-danger active:opacity-50"
                       onClick={() => {
-                        deleteUser(user.id);
+                        deleteUser(user.id).catch((error) => {
+                          console.error(error);
+                        });
                       }}
                     >
                       <DeleteIcon />

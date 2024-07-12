@@ -28,7 +28,7 @@ const CompanyNews = ({ companyId }: { companyId: string }) => {
         </div>
       </>
     );
-  } 
+  }
   if (isLoading) {
     return (
       <>
@@ -54,11 +54,8 @@ const CompanyNews = ({ companyId }: { companyId: string }) => {
                   <SignleNews
                     key={article.id}
                     sourceUrl={article.url}
-                    articleLogoUrl={article.articleLogoUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yIqP92wmjMPmMEQD17aeDfME4xSfnYFZhQ&s"}
-                    providerName={article.ProviderName ?? ""}
                     publishedAt={article.publishedAt ?? ""}
                     title={article.title}
-                    content={article.content ?? ""}
                   />
                 ))}
               </div>

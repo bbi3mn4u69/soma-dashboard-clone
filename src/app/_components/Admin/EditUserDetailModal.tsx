@@ -31,7 +31,7 @@ const EditUserDetailModal = () => {
   const utils = api.useContext();
 
 const EditAction = async () => {
-  if (editUserName || datePicker || userRoleControl) {
+  if (editUserName ?? datePicker ?? userRoleControl) {
     await userMutation.mutateAsync({
       id: userId!,
       ...(editUserName && { name: editUserName }),
