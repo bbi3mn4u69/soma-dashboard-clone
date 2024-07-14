@@ -79,10 +79,13 @@ export async function GET(request: Request) {
   try {
     const isCronJob = request.headers.get('X-Cron-Job') === 'true';
 
-    // Check if the environment is production and it's not a cron job request
     if (process.env.NODE_ENV === 'production' && !isCronJob) {
       return NextResponse.json("Skipping scraping in production environment");
     }
+    if (isCronJob){
+      NextResponse.json("Cron job started");
+    }
+      
 
     const feedItems = await extractFeedItems(url, parser);
 
