@@ -77,7 +77,7 @@ const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
 
 export async function GET(request: Request) {
   try {
-    const isCronJob = request.headers.get('X-Cron-Job') === 'true';
+    const isCronJob = request.headers.get('Host') === 'api.cron-job.org';
 
     if (process.env.NODE_ENV === 'production' && !isCronJob) {
       return NextResponse.json("Skipping scraping in production environment");
