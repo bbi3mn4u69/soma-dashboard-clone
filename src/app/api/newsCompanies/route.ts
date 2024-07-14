@@ -4,6 +4,7 @@ import * as cheerio from "cheerio";
 import Parser from "rss-parser";
 import { extractFeedItems, getCompaniesName, url } from "./routeHelper";
 import { db } from "~/server/db";
+
 const scrapfly = new ScrapflyClient({
   key: process.env.NEXT_PUBLIC_SCRAPEFLY_API_KEYS!,
 });
@@ -74,8 +75,15 @@ const urlMatches = (companyUrl: string, articleUrl: string): boolean => {
   }
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const isCronJob = request.headers.get('X-Cron-Job') === 'true';
+
+    // Check if the environment is production and it's not a cron job request
+    if (process.env.NODE_ENV === 'production' && !isCronJob) {
+      return NextResponse.json("Skipping scraping in production environment");
+    }
+
     const feedItems = await extractFeedItems(url, parser);
 
     type CompanyNewsItem = {
